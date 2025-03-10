@@ -78,13 +78,7 @@ Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) unt
 
 - Website: [sc.bimadev.xyz](https://sc.bimadev.xyz)
 - GitHub: [@bimadevs](https://github.com/bimadevs)
-- Email: contact@bimadev.xyz
-
-## 🙏 Acknowledgments
-
-- Terima kasih kepada semua kontributor yang telah membantu proyek ini
-- Inspirasi UI/UX dari berbagai platform source code modern
-- Komunitas developer Indonesia yang luar biasa
+- Email: bimadev06@gmail.com
 
 ---
 Made with ❤️ by [Bimadev](https://github.com/bimadevs)

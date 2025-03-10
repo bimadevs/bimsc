@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: 'BimSC - Source Code untuk Developer Indonesia',
     description: 'Platform berbagi source code berkualitas untuk developer Indonesia',
     creator: '@bimadevs',
-    images: ['/images/twitter-image.jpg'],
+    images: ['/images/preview.png'],
   },
   robots: {
     index: true,
@@ -62,20 +62,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
-    },
-  },
   manifest: '/site.webmanifest',
-  verification: {
-    google: 'your-google-site-verification',
-    yandex: 'your-yandex-verification',
-  },
 };
 
 export default function RootLayout({
