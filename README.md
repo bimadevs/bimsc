@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BimSC - Platform Source Code untuk Developer Indonesia 🚀
 
-## Getting Started
+![BimSC Preview](/public/images/preview.png)
 
-First, run the development server:
+BimSC adalah platform berbagi source code berkualitas untuk developer Indonesia. Platform ini dirancang untuk membantu developer menemukan, mengunduh, dan berbagi source code untuk mempercepat proses development.
 
+## ✨ Fitur Utama
+
+- 🎯 **Source Code Berkualitas**: Koleksi source code yang telah diverifikasi dan didokumentasikan dengan baik
+- 🔍 **Pencarian Mudah**: Sistem pencarian yang powerful dengan filter kategori
+- 📱 **Responsive Design**: Tampilan yang optimal di semua ukuran layar
+- 🌐 **Modern UI/UX**: Interface yang modern dengan animasi dan efek visual menarik
+- 🔄 **Real-time Updates**: Pembaruan konten secara real-time
+- 🔒 **Secure**: Implementasi keamanan yang kuat untuk melindungi data pengguna
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14
+- **Styling**: TailwindCSS
+- **Language**: TypeScript
+- **State Management**: React Hooks
+- **Animations**: Custom CSS Animations
+- **Deployment**: Vercel
+
+## 🚀 Quick Start
+
+1. **Clone Repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/bimadevs/bimsc.git
+cd bimsc
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install Dependencies**
+```bash
+npm install
+# atau
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Run Development Server**
+```bash
+npm run dev
+# atau
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Buka Browser**
+Buka [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## 📁 Struktur Proyek
 
-To learn more about Next.js, take a look at the following resources:
+```
+bimsc/
+├── app/
+│   ├── components/     # Reusable components
+│   ├── data/          # Static data dan types
+│   ├── utils/         # Utility functions
+│   └── ...           # Route pages
+├── public/           # Static assets
+└── ...
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Kontribusi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Kami sangat menghargai kontribusi dari komunitas. Untuk berkontribusi:
 
-## Deploy on Vercel
+1. Fork repository
+2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Lisensi
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) untuk detail.
+
+## 📞 Kontak
+
+- Website: [sc.bimadev.xyz](https://sc.bimadev.xyz)
+- GitHub: [@bimadevs](https://github.com/bimadevs)
+- Email: contact@bimadev.xyz
+
+## 🙏 Acknowledgments
+
+- Terima kasih kepada semua kontributor yang telah membantu proyek ini
+- Inspirasi UI/UX dari berbagai platform source code modern
+- Komunitas developer Indonesia yang luar biasa
+
+---
+Made with ❤️ by [Bimadev](https://github.com/bimadevs)
