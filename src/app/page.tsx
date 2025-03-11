@@ -9,6 +9,16 @@ const latestSourceCodes = [...sourceCodeData]
   .sort((a, b) => parseInt(b.id) - parseInt(a.id))
   .slice(0, 3);
 
+// Get the 3 most popular categories (based on source code count)
+const popularCategories = [...categories]
+  .filter(category => category !== 'Semua')
+  .map(category => ({
+    name: category,
+    count: sourceCodeData.filter(item => item.category === category).length
+  }))
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 3);
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950">
@@ -180,29 +190,70 @@ export default function Home() {
       {/* Categories Section dengan desain modern */}
       <section className="py-20 relative bg-slate-900/50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-              Kategori Populer
-            </span>
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {categories.filter(category => category !== 'Semua').map((category) => (
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-bold text-white">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+                Kategori Populer
+              </span>
+            </h2>
+            <Link
+              href="/categories"
+              className="text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-2"
+            >
+              Lihat Semua Kategori
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {popularCategories.map(({ name, count }, index) => (
               <Link
-                key={category}
-                href={`/source-code?category=${category.toLowerCase().replace(' ', '-')}`}
-                className="group relative p-6 rounded-xl overflow-hidden transition-all hover:scale-105"
+                key={name}
+                href={`/source-code?category=${name}`}
+                className="group relative p-8 rounded-xl overflow-hidden transition-all hover:scale-105 animate-float"
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
+                {/* Background with gradient */}
                 <div className="absolute inset-0 bg-slate-800 border border-slate-700 rounded-xl transition-colors group-hover:border-purple-500/50" />
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-r from-purple-500/30 to-blue-500/30 blur-xl -z-10" />
+                
+                {/* Content */}
                 <div className="relative">
-                  <h3 className="font-semibold text-lg text-slate-300 group-hover:text-purple-400 transition-colors mb-2">
-                    {category}
-                  </h3>
-                  <div className="flex items-center text-sm text-slate-500">
-                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 0h8v12H6V4z" clipRule="evenodd" />
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-bold text-2xl text-white group-hover:text-purple-400 transition-colors">
+                      {name}
+                    </h3>
+                    <span className="px-3 py-1 text-sm font-semibold text-purple-400 bg-purple-400/10 rounded-full border border-purple-400/20">
+                      {count} Source Code
+                    </span>
+                  </div>
+                  
+                  {/* Preview of source codes in this category */}
+                  <div className="space-y-3 mb-6">
+                    {sourceCodeData
+                      .filter(item => item.category === name)
+                      .slice(0, 3)
+                      .map(item => (
+                        <div
+                          key={item.id}
+                          className="text-slate-400 group-hover:text-slate-300 transition-colors flex items-center gap-2"
+                        >
+                          <span className="text-purple-400">•</span>
+                          {item.title}
+                        </div>
+                      ))
+                    }
+                  </div>
+                  
+                  <div className="inline-flex items-center gap-2 text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 px-4 py-2 rounded-md group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
+                    Lihat Source Code
+                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {sourceCodeData.filter(item => item.category === category).length} Source Code
                   </div>
                 </div>
               </Link>
