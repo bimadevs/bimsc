@@ -10,11 +10,18 @@ const SourceCodeCard = ({
   description,
   thumbnail,
   category,
-  downloadCount,
+  isNew,
   author,
 }: SourceCode) => {
   return (
-    <div className="group bg-slate-900 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 border border-slate-800">
+    <div className="group bg-slate-900 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 border border-slate-800 relative">
+      {/* New Badge */}
+      {isNew && (
+        <div className="absolute top-3 right-3 z-10 px-2 py-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-xs font-bold rounded-full animate-pulse">
+          NEW
+        </div>
+      )}
+      
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={thumbnail}
@@ -43,10 +50,7 @@ const SourceCodeCard = ({
           {title}
         </h3>
         <p className="text-slate-400 mb-4 line-clamp-2">{description}</p>
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-slate-500">
-            {downloadCount} Downloads
-          </span>
+        <div className="flex items-center justify-end">
           <Link
             href={`/source-code/${id}`}
             className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-md hover:from-purple-600 hover:to-blue-600 transition-all"

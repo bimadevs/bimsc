@@ -16,7 +16,7 @@ export default function SourceCodeList() {
       ? categoryParam as Category 
       : 'Semua'
   );
-  const [sortBy, setSortBy] = useState<'newest' | 'downloads'>('newest');
+  const [sortBy, setSortBy] = useState<'newest' | 'popular'>('newest');
 
   // Update selectedCategory when URL parameter changes
   useEffect(() => {
@@ -33,8 +33,9 @@ export default function SourceCodeList() {
   });
 
   const sortedData = [...filteredData].sort((a, b) => {
-    if (sortBy === 'downloads') {
-      return b.downloadCount - a.downloadCount;
+    if (sortBy === 'popular') {
+      // Sort by popularity (based on ID for now, higher ID = more popular)
+      return parseInt(b.id) - parseInt(a.id);
     }
     // For 'newest', we're using the ID as a proxy for date (in a real app, we'd use actual dates)
     return parseInt(b.id) - parseInt(a.id);
@@ -76,11 +77,11 @@ export default function SourceCodeList() {
 
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'newest' | 'downloads')}
+              onChange={(e) => setSortBy(e.target.value as 'newest' | 'popular')}
               className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 text-slate-300"
             >
               <option value="newest">Terbaru</option>
-              <option value="downloads">Terpopuler</option>
+              <option value="popular">Terpopuler</option>
             </select>
           </div>
         </div>
