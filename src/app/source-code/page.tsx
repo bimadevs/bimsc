@@ -1,14 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Header from '../components/Header';
 import SourceCodeCard from '../components/SourceCodeCard';
-import { sourceCodeData, categories } from '@/data/sourceCodeData';
+import { sourceCodeData, categories, Category } from '@/data/sourceCodeData';
 
 export default function SourceCodeList() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [selectedCategory, setSelectedCategory] = useState<Category>(
+    categoryParam && categories.includes(categoryParam as Category) 
+      ? categoryParam as Category 
+      : 'Semua'
+  );
   const [sortBy, setSortBy] = useState<'newest' | 'downloads'>('newest');
+
+  // Update selectedCategory when URL parameter changes
+  useEffect(() => {
+    if (categoryParam && categories.includes(categoryParam as Category)) {
+      setSelectedCategory(categoryParam as Category);
+    }
+  }, [categoryParam]);
 
   const filteredData = sourceCodeData.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -32,7 +47,7 @@ export default function SourceCodeList() {
       <main className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <h1 className="text-3xl font-bold mb-4 md:mb-0 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-            Source Code
+            {selectedCategory === 'Semua' ? 'Semua Source Code' : `Source Code ${selectedCategory}`}
           </h1>
           
           <div className="flex flex-col md:flex-row gap-4">
@@ -74,7 +89,7 @@ export default function SourceCodeList() {
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(category as Category)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedCategory === category
                   ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
