@@ -28,23 +28,28 @@ export async function middleware(request: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
 
   // Daftar path yang memerlukan autentikasi
-  const protectedPaths = ['/dashboard', '/profile', '/my-source-code']
+  const protectedPaths = ['/profile', '/my-source-code', '/api/download']
   
   // Cek apakah path saat ini memerlukan autentikasi
   const isProtectedPath = protectedPaths.some(path => 
     request.nextUrl.pathname.startsWith(path)
   )
 
-  // Jika path memerlukan autentikasi dan user belum login, redirect ke halaman login
-  if (isProtectedPath && !session) {
+  // Cek apakah ini adalah request untuk download
+  const isDownloadRequest = request.nextUrl.pathname.includes('/api/download') || 
+                           (request.nextUrl.pathname.includes('/source-code/') && 
+                            request.nextUrl.searchParams.has('download'))
+
+  // Jika path memerlukan autentikasi atau ini adalah request download dan user belum login, redirect ke halaman login
+  if ((isProtectedPath || isDownloadRequest) && !session) {
     const redirectUrl = new URL('/login', request.url)
-    redirectUrl.searchParams.set('redirect', request.nextUrl.pathname)
+    redirectUrl.searchParams.set('redirect', request.nextUrl.pathname + request.nextUrl.search)
     return NextResponse.redirect(redirectUrl)
   }
 
-  // Jika user sudah login dan mencoba mengakses halaman login/register, redirect ke dashboard
+  // Jika user sudah login dan mencoba mengakses halaman login/register, redirect ke homepage
   if (session && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/register')) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
   return NextResponse.next()
@@ -53,10 +58,11 @@ export async function middleware(request: NextRequest) {
 // Konfigurasi path yang akan diproses oleh middleware
 export const config = {
   matcher: [
-    '/dashboard/:path*',
     '/profile/:path*',
     '/my-source-code/:path*',
     '/login',
     '/register',
+    '/api/download/:path*',
+    '/source-code/:path*',
   ],
 } 
