@@ -59,7 +59,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
         if (response.status === 401) {
           setDownloadError('Silakan login untuk mendownload source code');
           setTimeout(() => {
-            router.push('/login');
+            router.push(`/login?redirect=/source-code/${params.id}`);
           }, 2000);
           return;
         }

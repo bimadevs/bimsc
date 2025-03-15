@@ -43,7 +43,17 @@ export async function middleware(request: NextRequest) {
   // Jika path memerlukan autentikasi atau ini adalah request download dan user belum login, redirect ke halaman login
   if ((isProtectedPath || isDownloadRequest) && !session) {
     const redirectUrl = new URL('/login', request.url)
-    redirectUrl.searchParams.set('redirect', request.nextUrl.pathname + request.nextUrl.search)
+    
+    // Tambahkan parameter redirect untuk mengarahkan kembali ke halaman sebelumnya setelah login
+    if (isDownloadRequest && request.nextUrl.pathname.includes('/source-code/')) {
+      // Jika ini adalah request download dari halaman detail source code
+      const sourceCodeId = request.nextUrl.pathname.split('/').pop()
+      redirectUrl.searchParams.set('redirect', `/source-code/${sourceCodeId}`)
+    } else {
+      // Untuk request lainnya
+      redirectUrl.searchParams.set('redirect', request.nextUrl.pathname + request.nextUrl.search)
+    }
+    
     return NextResponse.redirect(redirectUrl)
   }
 
