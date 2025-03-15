@@ -1,8 +1,14 @@
+'use client';
+
 import Header from './components/Header';
 import SourceCodeCard from './components/SourceCodeCard';
 import { sourceCodeData, categories } from '@/data/sourceCodeData';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useToast } from '@/context/ToastContext';
+import { useAuth } from '@/context/AuthContext';
 
 // Get the latest 3 source codes
 const latestSourceCodes = [...sourceCodeData]
@@ -52,6 +58,18 @@ const popularTechnologies = (() => {
 })();
 
 export default function Home() {
+  const { showToast } = useToast();
+  const { user } = useAuth();
+  const searchParams = useSearchParams();
+  
+  useEffect(() => {
+    // Cek apakah ada parameter showWelcome dari callback login
+    if (searchParams.get('showWelcome') === 'true' && user) {
+      const userName = user.email?.split('@')[0] || 'Pengguna';
+      showToast(`Selamat datang, ${userName}! 👋`, 'success');
+    }
+  }, [searchParams, user, showToast]);
+
   return (
     <main className="min-h-screen bg-slate-950">
       <Header />
@@ -401,7 +419,7 @@ export default function Home() {
           >
             Mulai Sekarang
           </Link>
-    </div>
+        </div>
       </section>
     </main>
   );

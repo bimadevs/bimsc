@@ -30,6 +30,10 @@ export async function GET(request: Request) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
+  // Tambahkan parameter untuk menampilkan toast selamat datang
+  const finalRedirectUrl = new URL(redirectTo, request.url)
+  finalRedirectUrl.searchParams.set('showWelcome', 'true')
+
   // URL untuk redirect setelah autentikasi berhasil
-  return NextResponse.redirect(new URL(redirectTo, request.url))
+  return NextResponse.redirect(finalRedirectUrl)
 } 

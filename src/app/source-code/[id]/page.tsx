@@ -8,6 +8,7 @@ import { sourceCodeData } from '@/data/sourceCodeData';
 import { downloadFromGithub } from '@/utils/github';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/context/ToastContext';
 
 export default function SourceCodeDetail({ params }: { params: { id: string } }) {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -15,6 +16,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const router = useRouter();
   const { user } = useAuth();
+  const { showToast } = useToast();
 
   const sourceCode = sourceCodeData.find((item) => item.id === params.id);
 
@@ -93,6 +95,9 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
       // Jika berhasil, download dari GitHub
       if (data && data.githubUrl) {
         await downloadFromGithub(data.githubUrl);
+        
+        // Tampilkan toast "Happy Coding"
+        showToast(`Happy Coding! Selamat mengeksplorasi source code ${data.title} 🚀`, 'success', 5000);
       } else {
         throw new Error('Data URL GitHub tidak ditemukan');
       }
