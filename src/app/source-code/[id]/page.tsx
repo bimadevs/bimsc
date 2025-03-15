@@ -52,24 +52,49 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
     try {
       // Panggil API endpoint download
       const response = await fetch(`/api/download?id=${params.id}`);
-      const data = await response.json();
       
+      // Jika status 401 (Unauthorized), arahkan ke halaman login
+      if (response.status === 401) {
+        setDownloadError('Silakan login untuk mendownload source code');
+        setTimeout(() => {
+          router.push(`/login?redirect=/source-code/${params.id}`);
+        }, 2000);
+        setIsDownloading(false);
+        return;
+      }
+      
+      // Cek status respons lainnya
       if (!response.ok) {
-        // Jika status 401 (Unauthorized), arahkan ke halaman login
-        if (response.status === 401) {
-          setDownloadError('Silakan login untuk mendownload source code');
-          setTimeout(() => {
-            router.push(`/login?redirect=/source-code/${params.id}`);
-          }, 2000);
-          return;
+        const errorText = await response.text();
+        let errorMessage = 'Terjadi kesalahan saat mendownload';
+        
+        try {
+          // Coba parse sebagai JSON jika memungkinkan
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.error || errorMessage;
+        } catch (e) {
+          // Jika bukan JSON, gunakan text sebagai pesan error
+          errorMessage = errorText || errorMessage;
         }
         
-        // Tampilkan error lainnya
-        throw new Error(data.error || 'Terjadi kesalahan saat mendownload');
+        throw new Error(errorMessage);
+      }
+      
+      // Jika respons OK, coba parse JSON
+      let data;
+      try {
+        const responseText = await response.text();
+        data = JSON.parse(responseText);
+      } catch (e) {
+        throw new Error('Format respons tidak valid');
       }
       
       // Jika berhasil, download dari GitHub
-      await downloadFromGithub(data.githubUrl);
+      if (data && data.githubUrl) {
+        await downloadFromGithub(data.githubUrl);
+      } else {
+        throw new Error('Data URL GitHub tidak ditemukan');
+      }
     } catch (error) {
       console.error('Error downloading:', error);
       setDownloadError(error instanceof Error ? error.message : 'Terjadi kesalahan saat mendownload');
