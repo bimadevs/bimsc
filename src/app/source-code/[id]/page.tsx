@@ -6,10 +6,13 @@ import Link from 'next/link';
 import Header from '../../components/Header';
 import { sourceCodeData } from '@/data/sourceCodeData';
 import { downloadFromGithub } from '@/utils/github';
+import { useRouter } from 'next/navigation';
 
 export default function SourceCodeDetail({ params }: { params: { id: string } }) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [activeTab, setActiveTab] = useState<'features' | 'usage'>('features');
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const router = useRouter();
 
   const sourceCode = sourceCodeData.find((item) => item.id === params.id);
 
@@ -44,12 +47,35 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
 
   const handleDownload = async () => {
     setIsDownloading(true);
+    setDownloadError(null);
+    
     try {
-      await downloadFromGithub(sourceCode.githubUrl);
+      // Panggil API endpoint download
+      const response = await fetch(`/api/download?id=${params.id}`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        // Jika status 401 (Unauthorized), arahkan ke halaman login
+        if (response.status === 401) {
+          setDownloadError('Silakan login untuk mendownload source code');
+          setTimeout(() => {
+            router.push('/login');
+          }, 2000);
+          return;
+        }
+        
+        // Tampilkan error lainnya
+        throw new Error(data.error || 'Terjadi kesalahan saat mendownload');
+      }
+      
+      // Jika berhasil, download dari GitHub
+      await downloadFromGithub(data.githubUrl);
     } catch (error) {
       console.error('Error downloading:', error);
+      setDownloadError(error instanceof Error ? error.message : 'Terjadi kesalahan saat mendownload');
+    } finally {
+      setIsDownloading(false);
     }
-    setIsDownloading(false);
   };
 
   return (
@@ -237,6 +263,18 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
                     </div>
                   )}
                 </div>
+                
+                {/* Download Error Message */}
+                {downloadError && (
+                  <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                    <div className="flex items-start">
+                      <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <span>{downloadError}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -11,10 +11,20 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isFromDownload, setIsFromDownload] = useState(false)
   const { signIn } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectUrl = searchParams.get('redirect') || '/dashboard'
+  const redirectUrl = searchParams.get('redirect') || '/'
+
+  useEffect(() => {
+    // Cek apakah user diarahkan dari halaman download
+    const fromPath = redirectUrl
+    if (fromPath && (fromPath.includes('/api/download') || 
+        (fromPath.includes('/source-code/') && fromPath.includes('download')))) {
+      setIsFromDownload(true)
+    }
+  }, [redirectUrl])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,6 +75,17 @@ export default function Login() {
                 Masuk ke akun Anda untuk mengakses fitur lengkap
               </p>
             </div>
+
+            {isFromDownload && (
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6 text-blue-400 text-sm">
+                <div className="flex items-start">
+                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Anda perlu login terlebih dahulu untuk mendownload source code. Setelah login, Anda akan diarahkan kembali ke halaman download.</span>
+                </div>
+              </div>
+            )}
 
             {error && (
               <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6 text-red-400 text-sm">
