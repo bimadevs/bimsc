@@ -7,6 +7,7 @@ export interface SourceCode {
   isNew?: boolean;
   githubUrl: string;
   demoUrl?: string;
+  languages: string[];
   technologies: string[];
   features: string[];
   author: {
@@ -18,19 +19,20 @@ export interface SourceCode {
 export const sourceCodeData: SourceCode[] = [
   {
     id: '1',
-    title: 'Go URL Shortener',
-    description: 'Layanan pemendek URL yang powerful dibangun dengan Go, Redis, dan PostgreSQL. Dilengkapi dengan API RESTful dan dashboard admin.',
-    thumbnail: '/images/url-shortener.png',
+    title: 'Realtime Chat Golang',
+    description: 'Aplikasi chat realtime yang dibangun dengan Go dan WebSocket. Mendukung chat personal dan grup dengan performa tinggi.',
+    thumbnail: '/images/chat-go.png',
     category: 'Backend',
     isNew: true,
-    githubUrl: 'https://github.com/bimadevs/go-url-shorten',
-    technologies: ['Go', 'Redis', 'PostgreSQL', 'Docker', 'RESTful API'],
+    githubUrl: 'https://github.com/bimadevs/realtime-chat-golang',
+    languages: ['Go'],
+    technologies: ['WebSocket', 'Redis', 'Docker', 'PostgreSQL'],
     features: [
-      'Pemendek URL dengan custom alias',
-      'Dashboard admin untuk manajemen URL',
-      'Rate limiting dan proteksi spam',
-      'Analytics dan tracking klik',
-      'API documentation dengan Swagger',
+      'Chat realtime dengan WebSocket',
+      'Mendukung chat personal dan grup',
+      'Sistem autentikasi pengguna',
+      'Penyimpanan pesan dengan PostgreSQL',
+      'Caching dengan Redis',
       'Containerization dengan Docker'
     ],
     author: {
@@ -46,15 +48,15 @@ export const sourceCodeData: SourceCode[] = [
     category: 'Full Stack',
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/pilihku-E-Voting',
-    demoUrl: 'https://pilihku-demo.example.com',
+    demoUrl: 'https://pilihku.bimadev.xyz',
+    languages: ['JavaScript'],
     technologies: ['React', 'Node.js', 'MongoDB', 'JWT', 'Blockchain'],
     features: [
-      'Sistem autentikasi dan verifikasi pemilih',
-      'Dashboard admin untuk manajemen pemilihan',
-      'Enkripsi data suara dengan blockchain',
-      'Laporan hasil pemilihan real-time',
-      'Responsive design untuk mobile dan desktop',
-      'Audit trail untuk keamanan'
+      'Sistem autentikasi multi-level',
+      'Enkripsi data suara',
+      'Dashboard admin komprehensif',
+      'Verifikasi pemilih',
+      'Hasil pemilihan realtime',
     ],
     author: {
       name: 'Bimadev',
@@ -63,21 +65,21 @@ export const sourceCodeData: SourceCode[] = [
   },
   {
     id: '3',
-    title: 'NextJS E-Commerce Template',
-    description: 'Template e-commerce modern dengan NextJS dan TailwindCSS. Siap pakai untuk toko online dengan fitur lengkap.',
-    thumbnail: '/images/ecommerce.png',
-    category: 'Frontend',
+    title: 'Auto Generator Konten English',
+    description: 'Tool otomatis untuk menghasilkan konten bahasa Inggris dengan AI. Cocok untuk content creator dan penulis.',
+    thumbnail: '/images/generate-konten-eanglish.jpeg',
+    category: 'AI Tools',
     isNew: true,
-    githubUrl: 'https://github.com/bimadevs/nextjs-ecommerce',
-    demoUrl: 'https://nextjs-ecommerce-demo.example.com',
-    technologies: ['Next.js', 'TailwindCSS', 'TypeScript', 'Stripe', 'Prisma'],
+    githubUrl: 'https://github.com/bimadevs/autogeneratorkontenenglish',
+    languages: ['Python', 'JavaScript'],
+    technologies: ['Flask', 'React', 'TailwindCSS', 'OpenAI API'],
     features: [
-      'Katalog produk dengan filter dan pencarian',
-      'Keranjang belanja dengan state management',
-      'Checkout dengan Stripe integration',
-      'Autentikasi pengguna',
-      'Dashboard admin',
-      'Responsive design'
+      'Generasi konten otomatis',
+      'Multiple content format',
+      'AI-powered suggestions',
+      'SEO optimization',
+      'Export dalam berbagai format',
+      'API integration'
     ],
     author: {
       name: 'Bimadev',
@@ -86,19 +88,22 @@ export const sourceCodeData: SourceCode[] = [
   },
   {
     id: '4',
-    title: 'Flutter Weather App',
-    description: 'Aplikasi cuaca dengan UI yang menarik dibangun dengan Flutter. Mendukung lokasi saat ini dan pencarian kota.',
-    thumbnail: '/images/weather-app.png',
-    category: 'Mobile Apps',
-    githubUrl: 'https://github.com/bimadevs/flutter-weather',
-    technologies: ['Flutter', 'Dart', 'OpenWeatherMap API', 'Bloc Pattern', 'Geolocator'],
+    title: 'Crypto Tracker',
+    description: 'Aplikasi tracking cryptocurrency dengan fitur realtime price updates dan portfolio management.',
+    thumbnail: '/images/crypto-tracker.png',
+    category: 'Web Development',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/crypto_tracker',
+    demoUrl: 'https://crypto-tracker-demo.example.com',
+    languages: ['JavaScript'],
+    technologies: ['React', 'CoinGecko API', 'Chart.js', 'TailwindCSS', 'Firebase'],
     features: [
-      'Prakiraan cuaca untuk 7 hari',
-      'Deteksi lokasi otomatis',
-      'Pencarian kota',
-      'Animasi UI yang menarik',
-      'Mode gelap dan terang',
-      'Penyimpanan lokasi favorit'
+      'Realtime price updates',
+      'Portfolio tracking',
+      'Price alerts',
+      'Historical data charts',
+      'Watchlist management',
+      'Market analysis tools'
     ],
     author: {
       name: 'Bimadev',
@@ -107,20 +112,22 @@ export const sourceCodeData: SourceCode[] = [
   },
   {
     id: '5',
-    title: 'Laravel Blog CMS',
-    description: 'Content Management System untuk blog dengan Laravel. Dilengkapi dengan editor WYSIWYG dan manajemen pengguna.',
-    thumbnail: '/images/laravel-cms.png',
-    category: 'Full Stack',
-    githubUrl: 'https://github.com/bimadevs/laravel-blog-cms',
-    demoUrl: 'https://laravel-cms-demo.example.com',
-    technologies: ['Laravel', 'MySQL', 'TailwindCSS', 'Alpine.js', 'CKEditor'],
+    title: 'TikTok Downloader',
+    description: 'Tool untuk mendownload video TikTok tanpa watermark. Mendukung download batch dan konversi format.',
+    thumbnail: '/images/tiktok_downloader.png',
+    category: 'Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/tiktok-downloader',
+    demoUrl: 'https://tiktok-dl.example.com',
+    languages: ['Python', 'JavaScript'],
+    technologies: ['FastAPI', 'React', 'FFmpeg', 'Redis'],
     features: [
-      'Dashboard admin yang intuitif',
-      'Editor WYSIWYG untuk konten',
-      'Manajemen kategori dan tag',
-      'SEO optimization tools',
-      'Sistem komentar dengan moderasi',
-      'Analytics dan reporting'
+      'Download tanpa watermark',
+      'Batch download',
+      'Format conversion',
+      'Video quality selection',
+      'Audio extraction',
+      'URL batch processing'
     ],
     author: {
       name: 'Bimadev',
@@ -129,19 +136,22 @@ export const sourceCodeData: SourceCode[] = [
   },
   {
     id: '6',
-    title: 'React Native Chat App',
-    description: 'Aplikasi chat realtime dengan React Native dan Firebase. Mendukung pesan teks, gambar, dan notifikasi.',
-    thumbnail: '/images/chat-app.png',
-    category: 'Mobile Apps',
-    githubUrl: 'https://github.com/bimadevs/react-native-chat',
-    technologies: ['React Native', 'Firebase', 'Redux', 'Expo', 'Push Notifications'],
+    title: 'Keyboard Checker',
+    description: 'Aplikasi web untuk mengecek fungsi keyboard dan mendeteksi tombol yang rusak atau tidak berfungsi.',
+    thumbnail: '/images/keyboard-checker.png',
+    category: 'Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/keyboard-checker',
+    demoUrl: 'https://keyboard-test.example.com',
+    languages: ['HTML', 'CSS', 'JavaScript'],
+    technologies: ['Web APIs'],
     features: [
-      'Chat realtime dengan Firebase',
-      'Pengiriman gambar dan file',
-      'Notifikasi push',
-      'Status online/offline',
-      'Read receipts',
-      'Group chats'
+      'Deteksi keypress realtime',
+      'Visual keyboard layout',
+      'Key combination testing',
+      'Response time testing',
+      'Multiple keyboard layouts',
+      'Test result export'
     ],
     author: {
       name: 'Bimadev',
@@ -150,20 +160,44 @@ export const sourceCodeData: SourceCode[] = [
   },
   {
     id: '7',
-    title: 'Vue.js Dashboard Template',
-    description: 'Template dashboard admin dengan Vue.js dan Tailwind CSS. Siap pakai untuk berbagai jenis aplikasi.',
-    thumbnail: '/images/vue-dashboard.png',
-    category: 'Frontend',
-    githubUrl: 'https://github.com/bimadevs/vue-dashboard',
-    demoUrl: 'https://vue-dashboard-demo.example.com',
-    technologies: ['Vue.js', 'Vuex', 'TailwindCSS', 'Chart.js', 'Vue Router'],
+    title: 'Bubble Game',
+    description: 'Game casual berbasis web dengan grafis menarik dan gameplay addictive. Dibuat dengan vanilla JavaScript.',
+    thumbnail: '/images/bubble-game.jpeg',
+    category: 'Game Development',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/bubble-game',
+    demoUrl: 'https://bubble-game.example.com',
+    languages: ['HTML', 'CSS', 'JavaScript'],
+    technologies: ['Canvas API'],
     features: [
-      'Multiple dashboard layouts',
-      'Interactive charts dan graphs',
-      'Data tables dengan sorting dan filtering',
-      'Form components',
-      'Authentication flow',
-      'Dark mode support'
+      'Animasi smooth',
+      'Multiple level',
+      'Score tracking',
+      'Sound effects',
+      'Touch support',
+      'Leaderboard system'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '8',
+    title: 'URL Shortener',
+    description: 'Aplikasi pemendek URL modern yang dibangun dengan Next.JS 14, supabase, dan tailwindcss. Dilengkapi dengan fitur autentikasi, pelacakan klik, dan manajemen link yang lengkap',
+    thumbnail: '/images/nextjs-url-shortener.png',
+    category: 'Full Stack',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/nextjs-url-shortener',
+    demoUrl: 'https://url-shortener.bimadev.xyz',
+    languages: ['TypeScript'],
+    technologies: ['Next.JS', 'Supabase', 'TailwindCSS', 'BimsUI', 'Framer Motion'],
+    features: [
+      'Autentikasi pengguna',
+      'Pelacakan klik',
+      'Manajemen link',
+      'Dashboard admin',
     ],
     author: {
       name: 'Bimadev',

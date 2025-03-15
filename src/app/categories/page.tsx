@@ -49,7 +49,7 @@ export default function Categories() {
           ))}
         </div>
 
-        <div className="mb-12 text-center relative">
+        <div className="mb-12 mt-16 text-center relative">
           <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 animate-gradient bg-300%">
             Kategori Source Code
           </h1>

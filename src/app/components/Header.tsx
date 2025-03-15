@@ -11,13 +11,6 @@ const Header = () => {
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
-    
-    // Prevent scrolling when menu is open
-    if (!isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
   };
 
   useEffect(() => {
@@ -36,15 +29,7 @@ const Header = () => {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
-    document.body.style.overflow = '';
   }, [pathname]);
-
-  // Clean up overflow style when component unmounts
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   const navLinks = [
     { href: '/', label: 'Beranda', icon: '🏠' },
@@ -144,76 +129,38 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation - Slide from right */}
+        {/* Mobile Navigation - Dropdown */}
         <div 
-          className={`md:hidden fixed top-0 right-0 bottom-0 w-full max-w-[280px] bg-slate-900/95 backdrop-blur-lg z-10 shadow-xl shadow-purple-900/30 transition-all duration-300 transform ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`md:hidden absolute top-full left-0 right-0 mt-1 transition-all duration-300 transform origin-top ${
+            isMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'
           }`}
-          style={{ 
-            borderLeft: '1px solid rgba(139, 92, 246, 0.2)',
-          }}
         >
-          {/* Mobile Menu Header */}
-          <div className="flex items-center justify-between p-4 border-b border-slate-800/50">
-            <span className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              Menu
-            </span>
-            <button
-              onClick={handleMenuToggle}
-              className="p-1 rounded-full hover:bg-slate-800/50 text-slate-400 hover:text-white transition-colors"
-              aria-label="Close menu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-          </div>
-          
-          {/* Mobile Menu Links */}
-          <div className="py-6 px-4 overflow-y-auto h-[calc(100%-64px)]">
-            <div className="space-y-2">
+          <div className="bg-slate-900/95 backdrop-blur-lg rounded-lg shadow-lg shadow-purple-900/20 border border-slate-800/50 mx-2 overflow-hidden">
+            <div className="p-2 space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative flex items-center text-base font-medium transition-all duration-300 w-full py-3 px-4 rounded-lg ${
+                  className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 ${
                     isActive(link.href)
-                      ? 'text-white bg-gradient-to-r from-purple-600/50 to-blue-600/50'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+                      ? 'bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-white'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
-                  <span className="flex items-center">
-                    <span className="text-xl mr-3">{link.icon}</span>
-                    <span>{link.label}</span>
-                  </span>
+                  <span className="text-lg mr-3">{link.icon}</span>
+                  <span className="font-medium">{link.label}</span>
                   {isActive(link.href) && (
                     <span className="ml-auto">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
                   )}
                 </Link>
               ))}
             </div>
-            
-            {/* Mobile Menu Footer */}
-            <div className="mt-8 pt-6 border-t border-slate-800/50">
-              <div className="rounded-lg bg-slate-800/50 p-4">
-                <h4 className="text-sm font-medium text-slate-300 mb-2">BimSC</h4>
-                <p className="text-xs text-slate-400">Platform source code untuk developer Indonesia</p>
-              </div>
-            </div>
           </div>
         </div>
-        
-        {/* Overlay for mobile menu */}
-        <div 
-          className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-0 transition-opacity duration-300 ${
-            isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
-          onClick={handleMenuToggle}
-        />
       </nav>
     </header>
   );

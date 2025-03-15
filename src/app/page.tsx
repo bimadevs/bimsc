@@ -19,6 +19,38 @@ const popularCategories = [...categories]
   .sort((a, b) => b.count - a.count)
   .slice(0, 3);
 
+// Get the 5 most popular programming languages
+const popularLanguages = (() => {
+  const languageCounts = new Map<string, number>();
+  
+  sourceCodeData.forEach(item => {
+    item.languages.forEach(lang => {
+      languageCounts.set(lang, (languageCounts.get(lang) || 0) + 1);
+    });
+  });
+  
+  return Array.from(languageCounts.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([language, count]) => ({ name: language, count }));
+})();
+
+// Get the 5 most popular technologies
+const popularTechnologies = (() => {
+  const techCounts = new Map<string, number>();
+  
+  sourceCodeData.forEach(item => {
+    item.technologies.forEach(tech => {
+      techCounts.set(tech, (techCounts.get(tech) || 0) + 1);
+    });
+  });
+  
+  return Array.from(techCounts.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([technology, count]) => ({ name: technology, count }));
+})();
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950">
@@ -63,7 +95,7 @@ export default function Home() {
         <div className="container relative mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Text Content */}
-            <div className="text-left space-y-8">
+            <div className="text-left space-y-8 mt-10">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-bold leading-tight">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
@@ -248,12 +280,103 @@ export default function Home() {
                       ))
                     }
                   </div>
-                  
-                  <div className="inline-flex items-center gap-2 text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 px-4 py-2 rounded-md group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
-                    Lihat Source Code
-                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Programming Languages Section */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-bold text-white">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
+                Bahasa Pemrograman Populer
+              </span>
+            </h2>
+            <Link
+              href="/source-code"
+              className="text-green-400 hover:text-green-300 transition-colors flex items-center gap-2"
+            >
+              Lihat Semua Source Code
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            {popularLanguages.map(({ name, count }, index) => (
+              <Link
+                key={name}
+                href={`/source-code?language=${encodeURIComponent(name)}`}
+                className="group relative p-6 rounded-xl overflow-hidden transition-all hover:scale-105 bg-slate-900/80 backdrop-blur-sm border border-slate-800 hover:border-green-500/30 hover:shadow-lg hover:shadow-green-500/10"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex flex-col items-center text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                     </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg text-white group-hover:text-green-400 transition-colors">
+                      {name}
+                    </h3>
+                    <p className="text-slate-400 text-sm">
+                      {count} Source Code
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-20 relative bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-bold text-white">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+                Teknologi Populer
+              </span>
+            </h2>
+            <Link
+              href="/source-code"
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2"
+            >
+              Lihat Semua Source Code
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            {popularTechnologies.map(({ name, count }, index) => (
+              <Link
+                key={name}
+                href={`/source-code?technology=${encodeURIComponent(name)}`}
+                className="group relative p-6 rounded-xl overflow-hidden transition-all hover:scale-105 bg-slate-900/80 backdrop-blur-sm border border-slate-800 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex flex-col items-center text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">
+                      {name}
+                    </h3>
+                    <p className="text-slate-400 text-sm">
+                      {count} Source Code
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -278,7 +401,7 @@ export default function Home() {
           >
             Mulai Sekarang
           </Link>
-        </div>
+    </div>
       </section>
     </main>
   );

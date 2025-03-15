@@ -41,7 +41,7 @@ export default function About() {
 
       <main className="container mx-auto px-4 py-12">
         {/* Breadcrumb */}
-        <div className="mb-6 flex items-center text-sm text-slate-400">
+        <div className="mb-6 mt-10 flex items-center text-sm text-slate-400">
           <Link href="/" className="hover:text-purple-400 transition-colors">
             Home
           </Link>

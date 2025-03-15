@@ -50,6 +50,42 @@
   }
 }
 
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes meteor {
+  0% {
+    transform: translateX(100%) translateY(-100%);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-250%) translateY(250%);
+    opacity: 0;
+  }
+}
+
+@keyframes blackhole {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -60,6 +96,18 @@
 
 .animate-glow {
   animation: glow 3s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-meteor {
+  animation: meteor 5s linear infinite;
+}
+
+.animate-blackhole {
+  animation: blackhole 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .bg-300\% {
