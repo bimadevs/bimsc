@@ -59,7 +59,7 @@ const popularTechnologies = (() => {
 
 export default function Home() {
   const { showToast } = useToast();
-  const { user } = useAuth();
+  const { user, showWelcomeToast, setShowWelcomeToast } = useAuth();
   const searchParams = useSearchParams();
   
   useEffect(() => {
@@ -68,7 +68,14 @@ export default function Home() {
       const userName = user.email?.split('@')[0] || 'Pengguna';
       showToast(`Selamat datang, ${userName}! 👋`, 'success');
     }
-  }, [searchParams, user, showToast]);
+    
+    // Cek apakah perlu menampilkan toast selamat datang dari AuthContext
+    if (showWelcomeToast && user) {
+      const userName = user.email?.split('@')[0] || 'Pengguna';
+      showToast(`Selamat datang, ${userName}! 👋`, 'success');
+      setShowWelcomeToast(false);
+    }
+  }, [searchParams, user, showToast, showWelcomeToast, setShowWelcomeToast]);
 
   return (
     <main className="min-h-screen bg-slate-950">

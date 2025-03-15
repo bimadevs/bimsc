@@ -96,8 +96,10 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
       if (data && data.githubUrl) {
         await downloadFromGithub(data.githubUrl);
         
-        // Tampilkan toast "Happy Coding"
-        showToast(`Happy Coding! Selamat mengeksplorasi source code ${data.title} 🚀`, 'success', 5000);
+        // Tampilkan toast "Happy Coding" dengan delay kecil untuk memastikan download dimulai dulu
+        setTimeout(() => {
+          showToast(`Happy Coding! Selamat mengeksplorasi source code ${data.title} 🚀`, 'success', 5000);
+        }, 500);
       } else {
         throw new Error('Data URL GitHub tidak ditemukan');
       }

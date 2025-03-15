@@ -4,15 +4,26 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/context/ToastContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { user, signOut, isLoading } = useAuth();
+  const { showToast } = useToast();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSignOut = async () => {
+    showToast('Terima kasih sudah berkunjung! Sampai jumpa kembali 👋', 'info');
+    
+    // Delay sedikit untuk memastikan toast muncul sebelum redirect
+    setTimeout(async () => {
+      await signOut();
+    }, 1000);
   };
 
   useEffect(() => {
@@ -113,7 +124,7 @@ const Header = () => {
                   {user.email?.charAt(0).toUpperCase()}
                 </div>
                 <button
-                  onClick={signOut}
+                  onClick={handleSignOut}
                   className="px-4 py-2 text-sm font-medium text-red-400 hover:text-red-300 rounded-lg transition-colors hover:bg-red-500/10"
                 >
                   Logout
@@ -212,7 +223,7 @@ const Header = () => {
                     </div>
                   </div>
                   <button
-                    onClick={signOut}
+                    onClick={handleSignOut}
                     className="flex items-center w-full px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-200"
                   >
                     <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
