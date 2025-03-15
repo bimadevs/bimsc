@@ -30,5 +30,5 @@ export async function GET(request: Request) {
   }
 
   // URL untuk redirect setelah autentikasi berhasil
-  return NextResponse.redirect(new URL('/dashboard', request.url))
+  return NextResponse.redirect(new URL('/', request.url))
 } 
