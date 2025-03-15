@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
 
   // Daftar path yang memerlukan autentikasi
-  const protectedPaths = ['/profile', '/my-source-code', '/api/download']
+  const protectedPaths = ['/api/download']
   
   // Cek apakah path saat ini memerlukan autentikasi
   const isProtectedPath = protectedPaths.some(path => 
@@ -58,8 +58,6 @@ export async function middleware(request: NextRequest) {
 // Konfigurasi path yang akan diproses oleh middleware
 export const config = {
   matcher: [
-    '/profile/:path*',
-    '/my-source-code/:path*',
     '/login',
     '/register',
     '/api/download/:path*',
