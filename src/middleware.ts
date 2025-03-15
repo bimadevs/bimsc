@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
 
   // Daftar path yang memerlukan autentikasi
-  const protectedPaths = ['/api/download']
+  const protectedPaths = ['/profile', '/my-source-code', '/api/download']
   
   // Cek apakah path saat ini memerlukan autentikasi
   const isProtectedPath = protectedPaths.some(path => 
@@ -49,6 +49,7 @@ export async function middleware(request: NextRequest) {
       // Jika ini adalah request download dari halaman detail source code
       const sourceCodeId = request.nextUrl.pathname.split('/').pop()
       redirectUrl.searchParams.set('redirect', `/source-code/${sourceCodeId}`)
+      redirectUrl.searchParams.set('message', 'Silakan login untuk mendownload source code')
     } else {
       // Untuk request lainnya
       redirectUrl.searchParams.set('redirect', request.nextUrl.pathname + request.nextUrl.search)

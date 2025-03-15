@@ -7,12 +7,14 @@ import Header from '../../components/Header';
 import { sourceCodeData } from '@/data/sourceCodeData';
 import { downloadFromGithub } from '@/utils/github';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function SourceCodeDetail({ params }: { params: { id: string } }) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [activeTab, setActiveTab] = useState<'features' | 'usage'>('features');
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const router = useRouter();
+  const { user } = useAuth();
 
   const sourceCode = sourceCodeData.find((item) => item.id === params.id);
 
@@ -46,6 +48,15 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
   }
 
   const handleDownload = async () => {
+    // Cek apakah pengguna sudah login
+    if (!user) {
+      setDownloadError('Silakan login untuk mendownload source code');
+      setTimeout(() => {
+        router.push(`/login?redirect=/source-code/${params.id}`);
+      }, 1500);
+      return;
+    }
+    
     setIsDownloading(true);
     setDownloadError(null);
     
@@ -53,17 +64,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
       // Panggil API endpoint download
       const response = await fetch(`/api/download?id=${params.id}`);
       
-      // Jika status 401 (Unauthorized), arahkan ke halaman login
-      if (response.status === 401) {
-        setDownloadError('Silakan login untuk mendownload source code');
-        setTimeout(() => {
-          router.push(`/login?redirect=/source-code/${params.id}`);
-        }, 2000);
-        setIsDownloading(false);
-        return;
-      }
-      
-      // Cek status respons lainnya
+      // Cek status respons
       if (!response.ok) {
         const errorText = await response.text();
         let errorMessage = 'Terjadi kesalahan saat mendownload';
