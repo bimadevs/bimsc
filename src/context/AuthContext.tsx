@@ -13,6 +13,8 @@ type AuthContextType = {
   signUp: (email: string, password: string) => Promise<{ error: any }>
   signInWithSocial: (provider: Provider, redirectTo?: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
+  resetPasswordForEmail: (email: string, redirectTo: string) => Promise<{ error: any }>
+  resetPassword: (password: string) => Promise<{ error: any }>
   showWelcomeToast: boolean
   setShowWelcomeToast: (show: boolean) => void
 }
@@ -119,6 +121,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const resetPasswordForEmail = async (email: string, redirectTo: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo
+    })
+    
+    return { error }
+  }
+
+  const resetPassword = async (password: string) => {
+    const { error } = await supabase.auth.updateUser({
+      password
+    })
+    
+    return { error }
+  }
+
   const value = {
     user,
     session,
@@ -127,6 +145,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signInWithSocial,
     signOut,
+    resetPasswordForEmail,
+    resetPassword,
     showWelcomeToast,
     setShowWelcomeToast
   }
