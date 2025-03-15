@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
+  const redirectTo = requestUrl.searchParams.get('redirect') || '/'
 
   if (code) {
     const cookieStore = cookies()
@@ -30,5 +31,5 @@ export async function GET(request: Request) {
   }
 
   // URL untuk redirect setelah autentikasi berhasil
-  return NextResponse.redirect(new URL('/', request.url))
+  return NextResponse.redirect(new URL(redirectTo, request.url))
 } 

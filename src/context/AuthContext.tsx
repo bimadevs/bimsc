@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { createClient_browser } from '@/utils/supabase'
-import { User, Session } from '@supabase/supabase-js'
+import { User, Session, Provider } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
 
 type AuthContextType = {
@@ -11,6 +11,7 @@ type AuthContextType = {
   isLoading: boolean
   signIn: (email: string, password: string) => Promise<{ error: any }>
   signUp: (email: string, password: string) => Promise<{ error: any }>
+  signInWithSocial: (provider: Provider, redirectTo?: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
 }
 
@@ -72,6 +73,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error }
   }
 
+  const signInWithSocial = async (provider: Provider, redirectTo?: string) => {
+    const callbackUrl = new URL('/auth/callback', window.location.origin)
+    
+    // Tambahkan parameter redirect jika ada
+    if (redirectTo) {
+      callbackUrl.searchParams.set('redirect', redirectTo)
+    }
+    
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: callbackUrl.toString()
+      }
+    })
+    
+    return { error }
+  }
+
   const signOut = async () => {
     await supabase.auth.signOut()
     router.push('/')
@@ -83,6 +102,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isLoading,
     signIn,
     signUp,
+    signInWithSocial,
     signOut,
   }
 
