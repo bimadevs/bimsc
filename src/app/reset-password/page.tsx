@@ -17,7 +17,7 @@ export default function ResetPassword() {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [hash, setHash] = useState<string | null>(null)
-  const { updatePassword } = useAuth()
+  const { resetPassword } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -56,7 +56,7 @@ export default function ResetPassword() {
     }
 
     try {
-      const { error } = await updatePassword(password, hash)
+      const { error } = await resetPassword(password)
       
       if (error) {
         throw error
