@@ -128,8 +128,8 @@ export default function Register() {
         
         <div className="max-w-md mx-auto mt-8 relative">
           {/* Floating Astronaut - Positioned to not overlap with navbar */}
-          <div className="absolute -top-8 -right-8 opacity-30 pointer-events-none hidden md:block z-0">
-            <div className="relative w-24 h-24 animate-float" style={{ animationDelay: '1s' }}>
+          <div className="absolute top-10 -right-8 opacity-50 pointer-events-none hidden md:block z-0">
+            <div className="relative w-32 h-32 animate-float" style={{ animationDelay: '1s' }}>
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-white opacity-80">
                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M9 9H9.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
