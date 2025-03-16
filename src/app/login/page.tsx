@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Header from '../components/Header'
 import { Provider } from '@supabase/supabase-js'
 import Image from 'next/image'
+import { useToast } from '@/context/ToastContext'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -15,12 +16,13 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [isFromDownload, setIsFromDownload] = useState(false)
   const [notificationMessage, setNotificationMessage] = useState<string | null>(null)
-  const [socialLoading, setSocialLoading] = useState<string | null>(null)
+  const [socialLoading, setSocialLoading] = useState<Provider | null>(null)
   const { signIn, signInWithSocial } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectUrl = searchParams.get('redirect') || '/'
   const message = searchParams.get('message')
+  const { showToast } = useToast()
 
   useEffect(() => {
     // Cek apakah user diarahkan dari halaman download
@@ -75,68 +77,57 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950">
       <Header />
-
-      {/* Animated Space Background */}
-      <div className="fixed inset-0 -z-10">
-        {/* Stars */}
-        <div className="absolute inset-0">
-          {[...Array(150)].map((_, i) => (
+      
+      <main className="container mx-auto px-4 py-8 pt-24 md:pt-32">
+        {/* Stars Background */}
+        <div className="fixed inset-0 -z-10 pointer-events-none">
+          {[...Array(50)].map((_, i) => (
             <div
               key={i}
               className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 2 + 1}px`,
-                height: `${Math.random() * 2 + 1}px`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${Math.random() * 5 + 5}s`
+                animationDelay: `${Math.random() * 3}s`
               }}
             />
           ))}
         </div>
 
-        {/* Nebula Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 opacity-50" />
-        
-        {/* Animated Planets */}
-        <div className="absolute top-1/4 -right-20 w-40 h-40 rounded-full bg-gradient-to-br from-purple-600 to-purple-900 opacity-20 blur-xl animate-float" style={{ animationDuration: '15s' }} />
-        <div className="absolute bottom-1/4 -left-20 w-60 h-60 rounded-full bg-gradient-to-br from-blue-600 to-blue-900 opacity-20 blur-xl animate-float" style={{ animationDuration: '20s', animationDelay: '2s' }} />
-        
-        {/* Shooting Stars */}
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-meteor"
-            style={{
-              top: `${Math.random() * 50}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${Math.random() * 2 + 3}s`
-            }}
-          >
-            <div className="w-1 h-20 bg-gradient-to-b from-white to-transparent transform -rotate-45" />
-          </div>
-        ))}
-      </div>
-
-      <main className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-md mx-auto mt-16 relative">
-          {/* Glowing Border Effect */}
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-50 animate-pulse"></div>
-          
-          <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-xl border border-slate-800/50 p-8 shadow-xl">
-            {/* Floating Icon */}
-            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-32 h-32 pointer-events-none">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center animate-float" style={{ animationDuration: '6s' }}>
-                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
+        {/* Meteors */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute animate-meteor"
+              style={{
+                top: `${Math.random() * 50}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`
+              }}
+            >
+              <div className="w-1 h-20 bg-gradient-to-b from-purple-500 to-transparent transform -rotate-45" />
             </div>
-            
+          ))}
+        </div>
+        
+        <div className="max-w-md mx-auto mt-8 relative">
+          {/* Floating Astronaut - Positioned to not overlap with navbar */}
+          <div className="absolute -top-8 -right-8 opacity-30 pointer-events-none hidden md:block z-0">
+            <div className="relative w-24 h-24 animate-float" style={{ animationDelay: '1s' }}>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-white opacity-80">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 9H9.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M15 9H15.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 14H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          
+          {/* Rest of the login form */}
+          <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-lg border border-slate-800 shadow-xl relative overflow-hidden z-10">
             <div className="text-center mb-8 pt-10">
               <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 mb-2">Login</h1>
               <p className="text-slate-400">
