@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
+import { createClient_browser } from '@/utils/supabase'
 import Header from '../components/Header'
 import Image from 'next/image'
 
@@ -20,7 +21,7 @@ export default function ResetPassword() {
   
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { resetPassword } = useAuth()
+  const supabase = createClient_browser()
   
   useEffect(() => {
     // Cek apakah ada session untuk reset password
@@ -67,7 +68,10 @@ export default function ResetPassword() {
     setLoading(true)
     
     try {
-      const { error } = await resetPassword(password)
+      // Gunakan Supabase client langsung untuk update password
+      const { error } = await supabase.auth.updateUser({
+        password: password
+      })
       
       if (error) {
         setError(error.message)
