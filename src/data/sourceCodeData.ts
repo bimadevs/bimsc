@@ -203,6 +203,81 @@ export const sourceCodeData: SourceCode[] = [
       name: 'Bimadev',
       github: 'bimadevs'
     }
+  },
+  {
+    id: '10',
+    title: 'Portofolio Cosmos',
+    description: 'Website portofolio personal dengan tema luar angkasa yang menakjubkan. Dilengkapi dengan animasi galaksi, planet, dan elemen kosmik lainnya.',
+    thumbnail: '/images/portofolio-cosmos.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-cosmos',
+    demoUrl: 'https://portofolio-cosmos.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'Three.js'],
+    features: [
+      'Animasi luar angkasa yang interaktif',
+      'Efek parallax untuk menciptakan kedalaman',
+      'Visualisasi 3D dengan Three.js',
+      'Mode gelap/terang dengan tema kosmik',
+      'Responsif di semua perangkat',
+      'Optimasi performa dengan Next.js',
+      'Transisi halaman yang mulus'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '11',
+    title: 'Portofolio Cyberpunk',
+    description: 'Website portofolio dengan tema cyberpunk futuristik. Menampilkan desain neon, glitch effect, dan estetika retro-futuristik yang khas.',
+    thumbnail: '/images/portofolio-cyberpunk.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-cyberpunk',
+    demoUrl: 'https://portofolio-cyberpunk.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP', 'CSS Grid'],
+    features: [
+      'Efek glitch dan distorsi digital',
+      'Animasi neon yang dinamis',
+      'UI dengan estetika cyberpunk',
+      'Efek hover futuristik',
+      'Responsif di semua perangkat',
+      'Navigasi interaktif dengan animasi',
+      'Integrasi dengan API GitHub'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '12',
+    title: 'Portofolio Hacker Terminal',
+    description: 'Website portofolio unik dengan antarmuka terminal hacker. Pengunjung dapat berinteraksi dengan website melalui perintah terminal seperti pengalaman CLI.',
+    thumbnail: '/images/portofolio-terminal.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-hacker-terminal',
+    demoUrl: 'https://portofolio-terminal.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'XTerm.js', 'TailwindCSS', 'Node.js'],
+    features: [
+      'Antarmuka terminal yang interaktif',
+      'Perintah kustom untuk navigasi',
+      'Simulasi hacking dan animasi kode',
+      'Riwayat perintah dan autocomplete',
+      'Easter eggs tersembunyi',
+      'Mode akses admin dengan password',
+      'Responsif di semua perangkat'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
   }
 ];
 
