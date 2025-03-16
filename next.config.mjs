@@ -7,7 +7,12 @@ const nextConfig = {
   },
   // Konfigurasi untuk menangani image domains
   images: {
-    domains: ['images.unsplash.com', 'github.com', 'avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   // Konfigurasi untuk menangani redirects
   async redirects() {
