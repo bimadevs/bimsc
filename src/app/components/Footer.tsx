@@ -183,55 +183,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="border-t border-slate-800/50 pt-8 pb-12">
-          <div className="max-w-2xl mx-auto text-center relative">
-            {/* Small Floating Elements */}
-            <div className="absolute -top-4 -left-8 w-16 h-16 opacity-60 pointer-events-none hidden md:block">
-              <div className="relative w-full h-full animate-float" style={{ animationDuration: '6s' }}>
-                <Image 
-                  src="/images/satellite.png" 
-                  alt="Floating Satellite" 
-                  width={64} 
-                  height={64}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-            
-            <h3 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 font-semibold mb-4">Jelajahi Galaksi Bersama Kami</h3>
-            <p className="text-slate-400 mb-4">Dapatkan update terbaru tentang source code dan tutorial development.</p>
-            <form className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto relative">
-              <div className="absolute inset-0 rounded-lg opacity-20 bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 blur-sm -z-10"></div>
-              <input
-                type="email"
-                placeholder="Masukkan email Anda"
-                className="flex-1 px-4 py-2 rounded-lg bg-slate-800/80 border border-slate-700/50 text-slate-300 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all relative overflow-hidden group"
-              >
-                {/* Animated Stars in Button */}
-                <div className="absolute inset-0 w-full h-full">
-                  {[...Array(3)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:animate-twinkle"
-                      style={{
-                        top: `${Math.random() * 100}%`,
-                        left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 2}s`
-                      }}
-                    />
-                  ))}
-                </div>
-                <span className="relative z-10">Subscribe</span>
-              </button>
-            </form>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="border-t border-slate-800/50 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
