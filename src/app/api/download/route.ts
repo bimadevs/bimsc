@@ -2,15 +2,42 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { sourceCodeData } from '@/data/sourceCodeData'
-import { downloadFromGithub } from '@/utils/github'
+
+// Tambahkan konfigurasi untuk mencegah static generation
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   try {
     // Verifikasi autentikasi
     const cookieStore = cookies()
+    
+    // Cek apakah kita berada di build time
+    if (process.env.NODE_ENV === 'production' && typeof window === 'undefined' && !cookieStore) {
+      return new NextResponse(
+        JSON.stringify({ error: 'Unauthorized. Silakan login untuk mendownload source code.' }),
+        { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    }
+    
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    
+    if (!supabaseUrl || !supabaseKey) {
+      return new NextResponse(
+        JSON.stringify({ error: 'Server configuration error.' }),
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    }
+    
     const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      supabaseUrl,
+      supabaseKey,
       {
         cookies: {
           get(name: string) {
