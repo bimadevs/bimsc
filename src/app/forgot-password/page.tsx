@@ -37,59 +37,102 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
       <Header />
       
-      <main className="container mx-auto px-4 py-8 pt-24 md:pt-32">
-        {/* Stars Background */}
-        <div className="fixed inset-0 -z-10 pointer-events-none">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`
-              }}
-            />
-          ))}
-        </div>
+      {/* Cosmic Background with Stars */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950 -z-10"></div>
+      
+      {/* Stars Background */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        {[...Array(100)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: Math.random() * 0.7 + 0.3,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+            }}
+          />
+        ))}
+      </div>
 
-        {/* Meteors */}
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-meteor"
-              style={{
-                top: `${Math.random() * 50}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 10}s`
-              }}
-            >
-              <div className="w-1 h-20 bg-gradient-to-b from-purple-500 to-transparent transform -rotate-45" />
-            </div>
-          ))}
+      {/* Distant Galaxies */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-indigo-500/10 blur-xl"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 300 + 100}px`,
+              height: `${Math.random() * 300 + 100}px`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+              opacity: 0.4,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Meteors */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-meteor"
+            style={{
+              top: `${Math.random() * 50}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${Math.random() * 2 + 3}s`,
+            }}
+          >
+            <div className="w-1 h-20 bg-gradient-to-b from-teal-500 to-transparent transform -rotate-45" />
+          </div>
+        ))}
+      </div>
+      
+      {/* Distant Planet */}
+      <div className="fixed bottom-1/4 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-teal-800/30 to-cyan-900/30 blur-sm -z-5 pointer-events-none">
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-teal-500/10 to-transparent animate-pulse" style={{ animationDuration: '8s' }}></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_var(--tw-gradient-stops))] from-teal-400/10 to-transparent"></div>
+          <div className="absolute w-full h-4 bg-teal-500/10 blur-sm top-1/4 transform -rotate-12"></div>
         </div>
-        
+      </div>
+      
+      {/* Orbital Rings */}
+      <div className="fixed top-1/3 left-1/3 w-96 h-96 border border-teal-500/10 rounded-full -z-5 pointer-events-none animate-spin-slow" style={{ animationDuration: '40s' }}></div>
+      <div className="fixed bottom-1/3 right-1/3 w-64 h-64 border border-cyan-500/10 rounded-full -z-5 pointer-events-none animate-spin-slow" style={{ animationDuration: '30s', animationDirection: 'reverse' }}></div>
+      
+      <main className="container mx-auto px-4 py-8 pt-24 md:pt-32 relative z-10">
         <div className="max-w-md mx-auto mt-8 relative">
-          {/* Floating Astronaut - Positioned to not overlap with navbar */}
-          <div className="absolute -top-8 -right-8 opacity-30 pointer-events-none hidden md:block z-0">
-            <div className="relative w-24 h-24 animate-float" style={{ animationDelay: '1s' }}>
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-white opacity-80">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M9 9H9.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M15 9H15.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M8 14H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          {/* Floating Space Object */}
+          <div className="absolute -top-16 -right-16 opacity-60 pointer-events-none hidden md:block z-0">
+            <div className="relative w-40 h-40 animate-float" style={{ animationDuration: '6s' }}>
+              <Image 
+                src="/images/satellite.png" 
+                alt="Floating Satellite" 
+                width={160} 
+                height={160}
+                className="object-contain"
+              />
             </div>
           </div>
           
-          {/* Rest of the forgot password form */}
-          <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-lg border border-slate-800 shadow-xl relative overflow-hidden z-10">
-            <div className="text-center mb-8 pt-10">
-              <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-indigo-400 to-teal-400 mb-2">Lupa Password</h1>
+          {/* Forgot Password Form Card */}
+          <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-slate-700/50 shadow-xl relative overflow-hidden z-10">
+            {/* Glowing Border Effect */}
+            <div className="absolute inset-0 rounded-2xl opacity-20 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 blur-sm -z-10"></div>
+            
+            {/* Card Content */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-400 mb-2">Pulihkan Akses</h1>
               <p className="text-slate-400">
                 Masukkan email Anda untuk menerima link reset password
               </p>
@@ -109,7 +152,7 @@ export default function ForgotPassword() {
                   </p>
                   <Link 
                     href="/login" 
-                    className="py-2 px-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg font-medium hover:from-teal-600 hover:to-indigo-600 transition-all"
+                    className="py-2 px-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg font-medium hover:from-teal-600 hover:to-cyan-600 transition-all"
                   >
                     Kembali ke Login
                   </Link>
@@ -145,7 +188,7 @@ export default function ForgotPassword() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                        className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
                         placeholder="nama@email.com"
                       />
                     </div>
@@ -154,7 +197,7 @@ export default function ForgotPassword() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 px-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg font-medium hover:from-teal-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden group"
+                    className="w-full py-3 px-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg font-medium hover:from-teal-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden group"
                   >
                     {/* Animated Stars in Button */}
                     <div className="absolute inset-0 w-full h-full">

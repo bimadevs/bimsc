@@ -1,10 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { createClient_browser } from '@/utils/supabase'
 import Header from '../components/Header'
 import Image from 'next/image'
 
@@ -15,226 +14,275 @@ export default function ResetPassword() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [hasSession, setHasSession] = useState(false)
-  
+  const [hash, setHash] = useState<string | null>(null)
+  const { updatePassword } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const supabase = createClient_browser()
-  
+
   useEffect(() => {
-    // Cek apakah ada session untuk reset password
-    const checkSession = async () => {
-      try {
-        // Cek apakah kita berada di client-side
-        if (typeof window === 'undefined') {
-          return
-        }
-        
-        // Cek apakah ada hash di URL (tanda dari Supabase auth)
-        if (window.location.hash) {
-          setHasSession(true)
-        } else {
-          // Jika tidak ada hash, redirect ke halaman forgot password
-          router.push('/forgot-password')
-        }
-      } catch (error) {
-        console.error('Error checking session:', error)
-        setError('Terjadi kesalahan saat memeriksa sesi. Silakan coba lagi.')
-      }
+    // Mendapatkan hash dari URL
+    const hashFromUrl = searchParams.get('hash')
+    if (hashFromUrl) {
+      setHash(hashFromUrl)
+    } else {
+      setError('Link reset password tidak valid atau telah kedaluwarsa')
     }
-    
-    checkSession()
-  }, [router])
-  
+  }, [searchParams])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    // Reset error state
+    setIsLoading(true)
     setError(null)
-    
+
     // Validasi password
-    if (password.length < 6) {
-      setError('Password harus minimal 6 karakter')
-      return
-    }
-    
     if (password !== confirmPassword) {
       setError('Password dan konfirmasi password tidak cocok')
+      setIsLoading(false)
       return
     }
-    
-    setLoading(true)
-    
+
+    if (password.length < 6) {
+      setError('Password harus minimal 6 karakter')
+      setIsLoading(false)
+      return
+    }
+
+    if (!hash) {
+      setError('Link reset password tidak valid atau telah kedaluwarsa')
+      setIsLoading(false)
+      return
+    }
+
     try {
-      // Gunakan Supabase client langsung untuk update password
-      const { error } = await supabase.auth.updateUser({
-        password: password
-      })
+      const { error } = await updatePassword(password, hash)
       
       if (error) {
-        setError(error.message)
-      } else {
-        setSuccess(true)
-        // Redirect ke halaman login setelah 3 detik
-        setTimeout(() => {
-          router.push('/login?message=Password berhasil diubah. Silakan login dengan password baru Anda.')
-        }, 3000)
+        throw error
       }
-    } catch (error: any) {
-      setError(error.message || 'Terjadi kesalahan saat mengubah password')
+      
+      setSuccess(true)
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan saat mengubah password')
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
-  
-  if (!hasSession && typeof window !== 'undefined') {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 pt-24 md:pt-32">
-        <div className="max-w-md w-full bg-slate-900/50 backdrop-blur-sm p-8 rounded-lg border border-slate-800 shadow-xl">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-white">Mengalihkan...</h1>
-            <p className="text-slate-400 mt-2">Anda akan dialihkan ke halaman lupa password.</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-  
+
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
       <Header />
       
-      <main className="container mx-auto px-4 py-8 pt-24 md:pt-32">
-        {/* Stars Background */}
-        <div className="fixed inset-0 -z-10 pointer-events-none">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`
-              }}
-            />
-          ))}
+      {/* Cosmic Background with Stars */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-950 to-slate-950 -z-10"></div>
+      
+      {/* Stars Background */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        {[...Array(100)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full animate-twinkle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: Math.random() * 0.7 + 0.3,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Distant Galaxies */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-blue-500/10 blur-xl"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 300 + 100}px`,
+              height: `${Math.random() * 300 + 100}px`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+              opacity: 0.4,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Meteors */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-meteor"
+            style={{
+              top: `${Math.random() * 50}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${Math.random() * 2 + 3}s`,
+            }}
+          >
+            <div className="w-1 h-20 bg-gradient-to-b from-indigo-500 to-transparent transform -rotate-45" />
+          </div>
+        ))}
+      </div>
+      
+      {/* Distant Planet */}
+      <div className="fixed bottom-1/4 -left-20 w-64 h-64 rounded-full bg-gradient-to-br from-indigo-800/30 to-purple-900/30 blur-sm -z-5 pointer-events-none">
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent animate-pulse" style={{ animationDuration: '8s' }}></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_var(--tw-gradient-stops))] from-indigo-400/10 to-transparent"></div>
+          <div className="absolute w-full h-4 bg-indigo-500/10 blur-sm top-1/4 transform -rotate-12"></div>
         </div>
-        
-        {/* Meteors */}
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-meteor"
-              style={{
-                top: `${Math.random() * 50}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 10}s`
-              }}
-            >
-              <div className="w-1 h-20 bg-gradient-to-b from-purple-500 to-transparent transform -rotate-45" />
-            </div>
-          ))}
-        </div>
-        
+      </div>
+      
+      {/* Orbital Rings */}
+      <div className="fixed top-1/3 right-1/3 w-96 h-96 border border-indigo-500/10 rounded-full -z-5 pointer-events-none animate-spin-slow" style={{ animationDuration: '40s' }}></div>
+      <div className="fixed bottom-1/3 left-1/3 w-64 h-64 border border-purple-500/10 rounded-full -z-5 pointer-events-none animate-spin-slow" style={{ animationDuration: '30s', animationDirection: 'reverse' }}></div>
+      
+      <main className="container mx-auto px-4 py-8 pt-24 md:pt-32 relative z-10">
         <div className="max-w-md mx-auto mt-8 relative">
-          {/* Floating Astronaut - Positioned to not overlap with navbar */}
-          <div className="absolute -top-8 -right-8 opacity-30 pointer-events-none hidden md:block z-0">
-            <div className="relative w-24 h-24 animate-float" style={{ animationDelay: '1s' }}>
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-white opacity-80">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M9 9H9.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M15 9H15.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M8 14H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          {/* Floating Space Object */}
+          <div className="absolute -top-16 -left-16 opacity-60 pointer-events-none hidden md:block z-0">
+            <div className="relative w-40 h-40 animate-float" style={{ animationDuration: '6s' }}>
+              <Image 
+                src="/images/planet.png" 
+                alt="Floating Planet" 
+                width={160} 
+                height={160}
+                className="object-contain"
+              />
             </div>
           </div>
           
-          <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-lg border border-slate-800 shadow-xl relative overflow-hidden z-10">
+          {/* Reset Password Form Card */}
+          <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-slate-700/50 shadow-xl relative overflow-hidden z-10">
             {/* Glowing Border Effect */}
-            <div className="absolute inset-0 rounded-lg opacity-20 bg-gradient-to-r from-purple-500 to-blue-500 blur-sm -z-10" />
+            <div className="absolute inset-0 rounded-2xl opacity-20 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 blur-sm -z-10"></div>
             
-            <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-white">Reset Password</h1>
-              <p className="text-slate-400 mt-2">Masukkan password baru untuk akun Anda</p>
+            {/* Card Content */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 mb-2">Atur Ulang Password</h1>
+              <p className="text-slate-400">
+                Buat password baru untuk akun Anda
+              </p>
             </div>
-            
-            {error && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-md mb-4">
-                {error}
-              </div>
-            )}
-            
-            {success && (
-              <div className="bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-md mb-4">
-                Password berhasil diubah! Anda akan dialihkan ke halaman login...
-              </div>
-            )}
-            
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-slate-400 mb-1">
-                  Password Baru
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                  placeholder="Minimal 6 karakter"
-                  required
-                  disabled={loading || success}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-400 mb-1">
-                  Konfirmasi Password
-                </label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white"
-                  placeholder="Masukkan kembali password baru"
-                  required
-                  disabled={loading || success}
-                />
-              </div>
-              
-              <button
-                type="submit"
-                className={`w-full py-2 px-4 rounded-md bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all ${
-                  loading ? 'opacity-70 cursor-not-allowed' : ''
-                }`}
-                disabled={loading || success}
-              >
-                {loading ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+
+            {success ? (
+              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-6 mb-6 text-center">
+                <div className="flex flex-col items-center">
+                  <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
+                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Memproses...
-                  </span>
-                ) : (
-                  'Reset Password'
+                  </div>
+                  <h3 className="text-xl font-medium text-green-400 mb-2">Password Berhasil Diubah!</h3>
+                  <p className="text-slate-400 mb-4">
+                    Password Anda telah berhasil diubah. Silakan login dengan password baru Anda.
+                  </p>
+                  <Link 
+                    href="/login" 
+                    className="py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all"
+                  >
+                    Pergi ke Halaman Login
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6 text-red-400 text-sm">
+                    <div className="flex items-start">
+                      <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <span>{error}</span>
+                    </div>
+                  </div>
                 )}
-              </button>
-            </form>
-            
-            <div className="mt-6 text-center">
-              <Link
-                href="/login"
-                className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
-              >
-                Kembali ke halaman login
-              </Link>
-            </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+                      Password Baru
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg className="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                        placeholder="Minimal 6 karakter"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-300 mb-2">
+                      Konfirmasi Password Baru
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg className="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <input
+                        id="confirmPassword"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                        placeholder="Ulangi password baru"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading || !hash}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden group"
+                  >
+                    {/* Animated Stars in Button */}
+                    <div className="absolute inset-0 w-full h-full">
+                      {[...Array(5)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:animate-twinkle"
+                          style={{
+                            top: `${Math.random() * 100}%`,
+                            left: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 2}s`
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="relative z-10">{isLoading ? 'Memproses...' : 'Ubah Password'}</span>
+                  </button>
+                </form>
+
+                <div className="mt-8 text-center">
+                  <p className="text-slate-400 text-sm">
+                    Ingat password Anda?{' '}
+                    <Link href="/login" className="text-indigo-400 hover:text-indigo-300 transition-colors">
+                      Login sekarang
+                    </Link>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </main>
