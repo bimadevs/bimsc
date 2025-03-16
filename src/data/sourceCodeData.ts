@@ -278,6 +278,106 @@ export const sourceCodeData: SourceCode[] = [
       name: 'Bimadev',
       github: 'bimadevs'
     }
+  },
+  {
+    id: '13',
+    title: 'Surreal Dreamscape',
+    description: 'Website dengan tema surrealis yang menggabungkan elemen mimpi dan fantasi. Pengalaman visual yang unik dengan animasi dan efek yang tidak konvensional.',
+    thumbnail: '/images/surreal-dreamscape.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/surreal-dreamscape',
+    demoUrl: 'https://surreal-dreamscape.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP', 'Canvas API'],
+    features: [
+      'Animasi surrealis yang menakjubkan',
+      'Efek distorsi dan morphing',
+      'Interaksi mouse yang unik',
+      'Transisi halaman yang mulus',
+      'Elemen UI yang tidak konvensional',
+      'Pengalaman storytelling visual',
+      'Responsif di semua perangkat'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '14',
+    title: 'Portofolio Anime Aesthetic',
+    description: 'Website portofolio dengan tema anime Jepang yang stylish. Menampilkan elemen visual anime, warna-warna pastel, dan animasi yang terinspirasi dari anime.',
+    thumbnail: '/images/portofolio-anime.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-anime-aesthetic',
+    demoUrl: 'https://portofolio-anime.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Anime.js', 'Lottie'],
+    features: [
+      'Desain terinspirasi anime Jepang',
+      'Animasi karakter dan elemen anime',
+      'Palette warna pastel yang menarik',
+      'Efek hover yang playful',
+      'Integrasi dengan Lottie animations',
+      'Transisi halaman yang smooth',
+      'Responsif di semua perangkat'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '15',
+    title: 'Portofolio Brutalist',
+    description: 'Website portofolio dengan desain brutalis yang berani dan tidak konvensional. Menampilkan tipografi yang kuat, layout asimetris, dan estetika raw.',
+    thumbnail: '/images/portofolio-brutalist.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-brutalist',
+    demoUrl: 'https://portofolio-brutalist.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'CSS Modules', 'GSAP'],
+    features: [
+      'Desain brutalis yang berani',
+      'Tipografi yang kuat dan ekspresif',
+      'Layout asimetris dan tidak konvensional',
+      'Kontras warna yang tinggi',
+      'Animasi yang minimal namun impactful',
+      'Navigasi yang unik',
+      'Responsif dengan pendekatan mobile-first'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '16',
+    title: 'Portofolio Steampunk',
+    description: 'Website portofolio dengan tema steampunk yang menggabungkan elemen era Victorian dengan teknologi uap. Desain yang kaya dengan detail mekanis dan tekstur.',
+    thumbnail: '/images/portofolio-steampunk.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/portofolio-steampunk',
+    demoUrl: 'https://portofolio-steampunk.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Three.js', 'GSAP'],
+    features: [
+      'Desain dengan tema steampunk yang detail',
+      'Animasi mekanis dan roda gigi',
+      'Efek tekstur logam dan kayu',
+      'UI dengan elemen Victorian',
+      'Interaksi yang terinspirasi dari mesin',
+      'Efek suara ambient steampunk',
+      'Responsif di semua perangkat'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
   }
 ];
 
