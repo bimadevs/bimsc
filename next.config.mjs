@@ -24,6 +24,10 @@ const nextConfig = {
       },
     ]
   },
+  // Konfigurasi untuk menangani static generation
+  staticPageGenerationTimeout: 180,
+  // Konfigurasi untuk menangani output
+  output: 'standalone',
 };
 
 export default nextConfig;
