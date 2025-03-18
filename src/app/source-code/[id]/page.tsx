@@ -300,7 +300,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
             >
               Fitur
             </button>
-            <button
+{/*             <button
               onClick={() => setActiveTab('usage')}
               className={`px-6 py-3 font-medium text-sm focus:outline-none ${
                 activeTab === 'usage'
@@ -309,7 +309,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
               }`}
             >
               Cara Penggunaan
-            </button>
+            </button> */}
           </div>
 
           <div className="p-1">
