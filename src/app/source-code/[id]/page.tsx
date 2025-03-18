@@ -9,6 +9,8 @@ import { downloadFromGithub } from '@/utils/github';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/context/ToastContext';
+import SourceCodePromo from '@/app/components/SourceCodePromo';
+import TechnologyList from '@/app/components/TechnologyList';
 
 export default function SourceCodeDetail({ params }: { params: { id: string } }) {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -19,6 +21,10 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
   const { showToast } = useToast();
 
   const sourceCode = sourceCodeData.find((item) => item.id === params.id);
+  
+  // Memastikan languages dan technologies selalu array, bahkan jika undefined
+  const safeLanguages = sourceCode && Array.isArray(sourceCode.languages) ? sourceCode.languages : [];
+  const safeTechnologies = sourceCode && Array.isArray(sourceCode.technologies) ? sourceCode.technologies : [];
 
   if (!sourceCode) {
     return (
@@ -58,19 +64,19 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
       }, 1500);
       return;
     }
-    
+
     setIsDownloading(true);
     setDownloadError(null);
-    
+
     try {
       // Panggil API endpoint download
       const response = await fetch(`/api/download?id=${params.id}`);
-      
+
       // Cek status respons
       if (!response.ok) {
         const errorText = await response.text();
         let errorMessage = 'Terjadi kesalahan saat mendownload';
-        
+
         try {
           // Coba parse sebagai JSON jika memungkinkan
           const errorData = JSON.parse(errorText);
@@ -79,10 +85,10 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
           // Jika bukan JSON, gunakan text sebagai pesan error
           errorMessage = errorText || errorMessage;
         }
-        
+
         throw new Error(errorMessage);
       }
-      
+
       // Jika respons OK, coba parse JSON
       let data;
       try {
@@ -91,11 +97,11 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
       } catch (e) {
         throw new Error('Format respons tidak valid');
       }
-      
+
       // Jika berhasil, download dari GitHub
       if (data && data.githubUrl) {
         await downloadFromGithub(data.githubUrl);
-        
+
         // Tampilkan toast "Happy Coding" dengan delay kecil untuk memastikan download dimulai dulu
         setTimeout(() => {
           showToast(`Happy Coding! Selamat mengeksplorasi source code ${data.title} 🚀`, 'success', 5000);
@@ -163,14 +169,14 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
-                
+
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4 z-10">
                   <span className="inline-block px-4 py-2 text-sm font-semibold text-purple-400 bg-purple-400/10 rounded-full border border-purple-400/20">
                     {sourceCode.category}
                   </span>
                 </div>
-                
+
                 {/* New Badge */}
                 {sourceCode.isNew && (
                   <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-xs font-bold rounded-full animate-pulse">
@@ -187,7 +193,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
                       {sourceCode.title}
                     </h1>
                   </div>
-                  
+
                   <div className="flex items-center mb-6">
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center mr-2">
@@ -205,48 +211,16 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
                       </Link>
                     </div>
                   </div>
-                  
+
                   <p className="text-slate-400 mb-6 text-lg leading-relaxed">
                     {sourceCode.description}
                   </p>
 
                   {/* Languages */}
-                  <div className="mb-6">
-                    <h3 className="text-white font-semibold mb-3">Bahasa Pemrograman</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {sourceCode.languages.map((lang) => (
-                        <Link
-                          key={lang}
-                          href={`/source-code?language=${encodeURIComponent(lang)}`}
-                          className="px-4 py-2 bg-green-500/10 rounded-full text-sm text-green-400 border border-green-500/20 hover:border-green-500/30 hover:bg-green-500/20 hover:text-green-300 transition-colors flex items-center gap-2"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                          </svg>
-                          {lang}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <TechnologyList technologies={sourceCode.languages} type="language" />
 
                   {/* Technologies */}
-                  <div className="mb-8">
-                    <h3 className="text-white font-semibold mb-3">Teknologi</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {sourceCode.technologies.map((tech) => (
-                        <Link
-                          key={tech}
-                          href={`/source-code?technology=${encodeURIComponent(tech)}`}
-                          className="px-4 py-2 bg-blue-500/10 rounded-full text-sm text-blue-400 border border-blue-700/20 hover:border-blue-500/30 hover:bg-blue-500/20 hover:text-blue-300 transition-colors flex items-center gap-2"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                          {tech}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <TechnologyList technologies={sourceCode.technologies} type="technology" />
                 </div>
 
                 {/* Action Buttons */}
@@ -296,7 +270,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
                     </div>
                   )}
                 </div>
-                
+
                 {/* Download Error Message */}
                 {downloadError && (
                   <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
@@ -313,41 +287,39 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
           </div>
         </div>
 
-        {/* Tabs and Content */}
-        <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-slate-800/50 overflow-hidden">
-          {/* Tabs */}
-          <div className="flex border-b border-slate-800">
+        {/* Features and Usage Tabs */}
+        <div className="mt-12">
+          <div className="flex border-b border-slate-800/70 mb-8">
             <button
               onClick={() => setActiveTab('features')}
-              className={`px-6 py-4 text-sm font-medium transition-colors ${
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
                 activeTab === 'features'
                   ? 'text-purple-400 border-b-2 border-purple-400'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-slate-400 hover:text-slate-300 transition-colors'
               }`}
             >
               Fitur
             </button>
             <button
               onClick={() => setActiveTab('usage')}
-              className={`px-6 py-4 text-sm font-medium transition-colors ${
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
                 activeTab === 'usage'
                   ? 'text-purple-400 border-b-2 border-purple-400'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-slate-400 hover:text-slate-300 transition-colors'
               }`}
             >
               Cara Penggunaan
             </button>
           </div>
 
-          {/* Tab Content */}
-          <div className="p-8">
+          <div className="p-1">
             {activeTab === 'features' && (
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold text-white mb-4">Fitur Utama</h3>
                 <ul className="space-y-4">
                   {sourceCode.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center mr-3 mt-0.5">
+                    <li key={index} className="flex">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center mr-3 mt-0.5">
                         <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
@@ -359,7 +331,10 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
               </div>
             )}
 
-            {activeTab === 'usage' && (
+            {/* Promo for custom development */}
+            <SourceCodePromo sourceCodeTitle={sourceCode.title} />
+
+            {/* {activeTab === 'usage' && (
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold text-white mb-4">Cara Penggunaan</h3>
                 <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700/50">
@@ -390,35 +365,35 @@ yarn dev`}</code>
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
 
         {/* Related Source Code */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-white mb-6">Source Code Terkait</h2>
-          
+
           {(() => {
             // Find source codes with similar technologies
             const relatedSourceCodes = sourceCodeData
-              .filter(item => 
+              .filter(item =>
                 item.id !== sourceCode.id && // Exclude current source code
-                item.technologies.some(tech => 
-                  sourceCode.technologies.includes(tech)
+                item.technologies.some(tech =>
+                  safeTechnologies.includes(tech)
                 )
               )
               .slice(0, 3); // Limit to 3 items
-              
+
             if (relatedSourceCodes.length === 0) {
               return (
                 <p className="text-slate-400">Tidak ada source code terkait yang ditemukan.</p>
               );
             }
-            
+
             return (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {relatedSourceCodes.map((item) => (
-                  <Link 
+                  <Link
                     key={item.id}
                     href={`/source-code/${item.id}`}
                     className="block group bg-slate-900/80 backdrop-blur-sm rounded-lg border border-slate-800 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20"
@@ -432,7 +407,7 @@ yarn dev`}</code>
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
-                      
+
                       {/* Category Badge */}
                       <div className="absolute bottom-3 left-3 z-10">
                         <span className="inline-block px-3 py-1 text-xs font-semibold text-purple-400 bg-purple-400/10 rounded-full border border-purple-400/20">
@@ -440,16 +415,16 @@ yarn dev`}</code>
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="p-4">
                       <h3 className="text-lg font-semibold mb-2 text-white group-hover:text-purple-400 transition-colors line-clamp-1">
                         {item.title}
                       </h3>
-                      
+
                       <div className="flex flex-wrap gap-2 mb-2">
                         {item.technologies.slice(0, 2).map((tech) => (
-                          <span 
-                            key={tech} 
+                          <span
+                            key={tech}
                             className="px-2 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded border border-blue-500/20"
                           >
                             {tech}

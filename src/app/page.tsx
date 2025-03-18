@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/context/ToastContext';
 import { useAuth } from '@/context/AuthContext';
+import PromoSection from './components/PromoSection';
 
 // Get the latest 3 source codes
 const latestSourceCodes = [...sourceCodeData]
@@ -244,6 +245,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Promo Section */}
+      <PromoSection />
+
       {/* Categories Section dengan desain modern */}
       <section className="py-20 relative bg-slate-900/50">
         <div className="container mx-auto px-4">
@@ -426,7 +430,7 @@ export default function Home() {
           >
             Mulai Sekarang
           </Link>
-        </div>
+    </div>
       </section>
     </main>
   );

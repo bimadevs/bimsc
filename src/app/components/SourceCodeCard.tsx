@@ -13,9 +13,12 @@ const SourceCodeCard = ({
   isNew,
   demoUrl,
   author,
-  languages,
-  technologies,
+  languages = [],
+  technologies = [],
 }: SourceCode) => {
+  const safeLanguages = Array.isArray(languages) ? languages : [];
+  const safeTechnologies = Array.isArray(technologies) ? technologies : [];
+
   return (
     <div className="group bg-slate-900 rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 border border-slate-800 relative">
       {/* New Badge */}
@@ -67,9 +70,9 @@ const SourceCodeCard = ({
         {/* Languages and Technologies */}
         <div className="space-y-2 mb-4">
           {/* Languages */}
-          {languages.length > 0 && (
+          {safeLanguages.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {languages.slice(0, 2).map((lang) => (
+              {safeLanguages.slice(0, 2).map((lang) => (
                 <Link 
                   key={lang} 
                   href={`/source-code?language=${encodeURIComponent(lang)}`}
@@ -81,18 +84,18 @@ const SourceCodeCard = ({
                   {lang}
                 </Link>
               ))}
-              {languages.length > 2 && (
+              {safeLanguages.length > 2 && (
                 <span className="px-2 py-1 text-xs font-medium bg-slate-800 text-slate-400 rounded border border-slate-700">
-                  +{languages.length - 2}
+                  +{safeLanguages.length - 2}
                 </span>
               )}
             </div>
           )}
           
           {/* Technologies */}
-          {technologies.length > 0 && (
+          {safeTechnologies.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {technologies.slice(0, 2).map((tech) => (
+              {safeTechnologies.slice(0, 2).map((tech) => (
                 <Link 
                   key={tech} 
                   href={`/source-code?technology=${encodeURIComponent(tech)}`}
@@ -104,11 +107,18 @@ const SourceCodeCard = ({
                   {tech}
                 </Link>
               ))}
-              {technologies.length > 2 && (
+              {safeTechnologies.length > 2 && (
                 <span className="px-2 py-1 text-xs font-medium bg-slate-800 text-slate-400 rounded border border-slate-700">
-                  +{technologies.length - 2}
+                  +{safeTechnologies.length - 2}
                 </span>
               )}
+            </div>
+          )}
+          
+          {/* Tampilkan label jika tidak ada bahasa dan teknologi */}
+          {safeLanguages.length === 0 && safeTechnologies.length === 0 && (
+            <div className="px-2 py-1 text-xs font-medium bg-slate-800 text-slate-400 rounded border border-slate-700 inline-block">
+              Belum ada detail teknologi
             </div>
           )}
         </div>

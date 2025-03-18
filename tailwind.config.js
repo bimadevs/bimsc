@@ -21,6 +21,7 @@ module.exports = {
         'blackhole': 'blackhole 3s cubic-bezier(0.4, 0, 0.2, 1) infinite',
         'spin-slow': 'spin 20s linear infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'fadeIn': 'fadeIn 0.5s ease-out forwards',
       },
       keyframes: {
         float: {
@@ -65,6 +66,16 @@ module.exports = {
           '100%': { 
             transform: 'scale(0) rotate(360deg)',
             opacity: '0',
+          },
+        },
+        fadeIn: {
+          '0%': { 
+            opacity: '0',
+            transform: 'translateY(-20px)',
+          },
+          '100%': { 
+            opacity: '1',
+            transform: 'translateY(0)',
           },
         },
       },

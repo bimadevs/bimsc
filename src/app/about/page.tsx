@@ -1,6 +1,5 @@
 import Header from '../components/Header';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function About() {
   return (
@@ -54,7 +53,7 @@ export default function About() {
         {/* Hero Section */}
         <div className="relative mb-16 rounded-2xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-blue-900/20 to-slate-900/10 backdrop-blur-sm -z-10" />
-          
+
           <div className="py-16 px-8 text-center relative">
             {/* Orbiting Planet */}
             <div className="absolute top-8 right-8 opacity-30 pointer-events-none hidden md:block">
@@ -126,50 +125,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Contribution Section */}
-          <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-8 mb-16 relative overflow-hidden">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 -z-10" />
-            
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="md:w-1/2">
-                <div className="w-16 h-16 mb-6 rounded-full bg-green-500/10 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-white mb-4">
-                  Kontribusi
-                </h2>
-                <p className="text-slate-400 leading-relaxed mb-4">
-                  Kami mengundang para developer untuk berkontribusi dalam pengembangan komunitas ini.
-                  Anda dapat berkontribusi dengan cara:
-                </p>
-              </div>
-              
-              <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  'Membagikan source code project Anda',
-                  'Memberikan feedback dan saran perbaikan',
-                  'Melaporkan bug atau masalah',
-                  'Membantu dokumentasi',
-                  'Berbagi pengalaman dan pengetahuan',
-                ].map((item, index) => (
-                  <div key={index} className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 border border-slate-700/50 hover:border-green-500/30 transition-colors">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-0.5 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center flex-shrink-0">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      </div>
-                      <p className="text-slate-300">{item}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Contact Section */}
           <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-8">
             <div className="flex flex-col md:flex-row items-center gap-8">
@@ -214,17 +169,17 @@ export default function About() {
                   </a>
                 </div>
               </div>
-              
+
               <div className="md:w-1/2 flex justify-center">
                 <div className="relative w-64 h-64">
                   {/* Planet */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 animate-pulse" style={{ animationDuration: '4s' }} />
                   <div className="absolute inset-[4px] rounded-full bg-slate-950" />
-                  
+
                   {/* Rings */}
                   <div className="absolute inset-[-20px] border-2 border-purple-500/20 rounded-full animate-spin" style={{ animationDuration: '20s', transform: 'rotateX(75deg)' }} />
                   <div className="absolute inset-[-40px] border-2 border-blue-500/20 rounded-full animate-spin" style={{ animationDuration: '25s', transform: 'rotateX(75deg) rotateY(10deg)' }} />
-                  
+
                   {/* Satellites */}
                   <div className="absolute inset-[-20px] animate-spin" style={{ animationDuration: '10s' }}>
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50" />

@@ -26,14 +26,13 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/realtime-chat-golang',
     languages: ['Go'],
-    technologies: ['WebSocket', 'Redis', 'Docker', 'PostgreSQL'],
+    technologies: ['Gorilla WebSocket', 'Fiber', 'SQLite3'],
     features: [
       'Chat realtime dengan WebSocket',
-      'Mendukung chat personal dan grup',
-      'Sistem autentikasi pengguna',
-      'Penyimpanan pesan dengan PostgreSQL',
-      'Caching dengan Redis',
-      'Containerization dengan Docker'
+      'Sistem username untuk indentifikasi pengguna',
+      'Responsif',
+      'Penyimpanan pesan dengan SQLite3',
+      'Penanda waktu pesan',
     ],
     author: {
       name: 'Bimadev',
@@ -43,49 +42,51 @@ export const sourceCodeData: SourceCode[] = [
   {
     id: '2',
     title: 'PilihKu - Sistem E-Voting',
-    description: 'Platform e-voting modern dan aman untuk pemilihan digital. Dilengkapi dengan sistem verifikasi dan enkripsi data.',
+    description: 'Platform e-voting modern dan aman untuk pemilihan digital. Dilengkapi dengan sistem verifikasi',
     thumbnail: '/images/pilihku.png',
     category: 'Full Stack',
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/pilihku-E-Voting',
     demoUrl: 'https://pilihku.bimadev.xyz',
-    languages: ['JavaScript'],
-    technologies: ['React', 'Node.js', 'MongoDB', 'JWT', 'Blockchain'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Node.js', 'Supabase', 'NextJs', 'TailwindCSS', 'Framer Motion'],
     features: [
       'Sistem autentikasi multi-level',
-      'Enkripsi data suara',
       'Dashboard admin komprehensif',
       'Verifikasi pemilih',
+      'Import data pemilih',
+      'Export hasil pemilihan',
       'Hasil pemilihan realtime',
+      'Countdown timer',
+      'Pengumuman otomatis pada waktu yang ditentukan',
+      'Jadwal pemilihan'
     ],
     author: {
       name: 'Bimadev',
       github: 'bimadevs'
     }
   },
-  {
-    id: '3',
-    title: 'Auto Generator Konten English',
-    description: 'Tool otomatis untuk menghasilkan konten bahasa Inggris dengan AI. Cocok untuk content creator dan penulis.',
-    thumbnail: '/images/generate-konten-eanglish.jpeg',
-    category: 'AI Tools',
-    isNew: true,
-    githubUrl: 'https://github.com/bimadevs/autogeneratorkontenenglish',
-    languages: ['Python', 'JavaScript'],
-    technologies: ['Flask', 'React', 'TailwindCSS', 'OpenAI API'],
-    features: [
-      'Generasi konten otomatis',
-      'Multiple content format',
-      'AI-powered suggestions',
-      'SEO optimization',
-      'Export dalam berbagai format',
-      'API integration'
-    ],
-    author: {
-      name: 'Bimadev',
-      github: 'bimadevs'
-    }
-  },
+  //{
+  //  id: '3',
+  //  title: 'Auto Generator Konten English',
+  //  description: 'Tool otomatis untuk menghasilkan konten bahasa Inggris dengan AI',
+  //  thumbnail: '/images/generate-konten-eanglish.jpeg',
+  //  category: 'AI Tools',
+  //  isNew: true,
+  //  githubUrl: 'https://github.com/bimadevs/autogeneratorkontenenglish',
+  //  languages: ['Python', 'JavaScript'],
+  //  technologies: ['Flask', 'React', 'TailwindCSS', 'Imagemagick', 'gTTS', 'moviepy'],
+  //  features: [
+  //    'Multiple content format',
+  //    'Pembuatan video pembelajaran otomatis',
+  //    'Text-to-Speech',
+  //    'Efel visual dengan teks terjemahan dan penjelasan kata'
+  //  ],
+  //  author: {
+  //    name: 'Bimadev',
+  //    github: 'bimadevs'
+  //  }
+  //},
   {
     id: '4',
     title: 'Crypto Tracker',
@@ -95,15 +96,13 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/crypto_tracker',
     demoUrl: 'https://crypto-tracker-demo.example.com',
-    languages: ['JavaScript'],
-    technologies: ['React', 'CoinGecko API', 'Chart.js', 'TailwindCSS', 'Firebase'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'NextJs', 'CoinCap API', 'TailwindCSS', 'Framer Motion'],
     features: [
       'Realtime price updates',
-      'Portfolio tracking',
-      'Price alerts',
+      'Fitur Pencarian',
+      'Desain Responsif',
       'Historical data charts',
-      'Watchlist management',
-      'Market analysis tools'
     ],
     author: {
       name: 'Bimadev',
@@ -119,15 +118,12 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/tiktok-downloader',
     demoUrl: 'https://tiktok-dl.example.com',
-    languages: ['Python', 'JavaScript'],
-    technologies: ['FastAPI', 'React', 'FFmpeg', 'Redis'],
+    languages: ['HTML', 'JavaScript'],
+    technologies: ['Tickydown API', 'TailwindCSS',],
     features: [
       'Download tanpa watermark',
-      'Batch download',
-      'Format conversion',
       'Video quality selection',
       'Audio extraction',
-      'URL batch processing'
     ],
     author: {
       name: 'Bimadev',
@@ -142,16 +138,12 @@ export const sourceCodeData: SourceCode[] = [
     category: 'Tools',
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/keyboard-checker',
-    demoUrl: 'https://keyboard-test.example.com',
+    demoUrl: 'https://bimadevs.github.io/keyboard-checker',
     languages: ['HTML', 'CSS', 'JavaScript'],
-    technologies: ['Web APIs'],
+    technologies: [],
     features: [
       'Deteksi keypress realtime',
       'Visual keyboard layout',
-      'Key combination testing',
-      'Response time testing',
-      'Multiple keyboard layouts',
-      'Test result export'
     ],
     author: {
       name: 'Bimadev',
@@ -166,16 +158,16 @@ export const sourceCodeData: SourceCode[] = [
     category: 'Game Development',
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/bubble-game',
-    demoUrl: 'https://bubble-game.example.com',
+    demoUrl: 'https://bimadevs.github.io/bubble-game',
     languages: ['HTML', 'CSS', 'JavaScript'],
-    technologies: ['Canvas API'],
+    technologies: [],
     features: [
-      'Animasi smooth',
+      'Gameplay sederhana',
       'Multiple level',
       'Score tracking',
-      'Sound effects',
+      'Endless fun',
       'Touch support',
-      'Leaderboard system'
+      'Ringa dan Cepat'
     ],
     author: {
       name: 'Bimadev',
@@ -198,6 +190,7 @@ export const sourceCodeData: SourceCode[] = [
       'Pelacakan klik',
       'Manajemen link',
       'Dashboard admin',
+      'Custom Initial'
     ],
     author: {
       name: 'Bimadev',
@@ -213,16 +206,14 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-cosmos',
     demoUrl: 'https://portofolio-cosmos.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'Three.js'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion'],
     features: [
-      'Animasi luar angkasa yang interaktif',
-      'Efek parallax untuk menciptakan kedalaman',
-      'Visualisasi 3D dengan Three.js',
-      'Mode gelap/terang dengan tema kosmik',
+      'Desain futuristik dengan tema luar angkasa',
+      'Animasi dan transisi yang halus menggunakan framer motion',
       'Responsif di semua perangkat',
       'Optimasi performa dengan Next.js',
-      'Transisi halaman yang mulus'
+      'Efek parallax dan interaksi mouse'
     ],
     author: {
       name: 'Bimadev',
@@ -238,8 +229,8 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-cyberpunk',
     demoUrl: 'https://portofolio-cyberpunk.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP', 'CSS Grid'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP', 'Framer Motion'],
     features: [
       'Efek glitch dan distorsi digital',
       'Animasi neon yang dinamis',
@@ -247,7 +238,6 @@ export const sourceCodeData: SourceCode[] = [
       'Efek hover futuristik',
       'Responsif di semua perangkat',
       'Navigasi interaktif dengan animasi',
-      'Integrasi dengan API GitHub'
     ],
     author: {
       name: 'Bimadev',
@@ -263,7 +253,7 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-hacker-terminal',
     demoUrl: 'https://portofolio-terminal.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
+    languages: ['TypeScript'],
     technologies: ['React', 'Next.js', 'XTerm.js', 'TailwindCSS', 'Node.js'],
     features: [
       'Antarmuka terminal yang interaktif',
@@ -288,8 +278,8 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/surreal-dreamscape',
     demoUrl: 'https://surreal-dreamscape.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP', 'Canvas API'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'GSAP'],
     features: [
       'Animasi surrealis yang menakjubkan',
       'Efek distorsi dan morphing',
@@ -313,14 +303,12 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-anime-aesthetic',
     demoUrl: 'https://portofolio-anime.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'Anime.js', 'Lottie'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS'],
     features: [
-      'Desain terinspirasi anime Jepang',
-      'Animasi karakter dan elemen anime',
+      'Desain terinspirasi Jepang',
       'Palette warna pastel yang menarik',
       'Efek hover yang playful',
-      'Integrasi dengan Lottie animations',
       'Transisi halaman yang smooth',
       'Responsif di semua perangkat'
     ],
@@ -338,8 +326,8 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-brutalist',
     demoUrl: 'https://portofolio-brutalist.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'CSS Modules', 'GSAP'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion'],
     features: [
       'Desain brutalis yang berani',
       'Tipografi yang kuat dan ekspresif',
@@ -363,8 +351,8 @@ export const sourceCodeData: SourceCode[] = [
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/portofolio-steampunk',
     demoUrl: 'https://portofolio-steampunk.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'Three.js', 'GSAP'],
+    languages: ['TypeScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'GSAP'],
     features: [
       'Desain dengan tema steampunk yang detail',
       'Animasi mekanis dan roda gigi',
@@ -387,14 +375,13 @@ export const sourceCodeData: SourceCode[] = [
     category: 'AI Tools',
     isNew: true,
     githubUrl: 'https://github.com/bimadevs/image-to-code',
-    demoUrl: 'https://image-to-code-app.vercel.app',
-    languages: ['TypeScript', 'JavaScript', 'Python'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'Langchain', 'OpenAI API', 'Vercel AI SDK'],
+    demoUrl: 'https://imgtocode.streamlit.app',
+    languages: ['Python'],
+    technologies: ['Streamlit', 'Pillow', 'Goggle-generativeai'],
     features: [
       'Konversi gambar UI menjadi kode HTML dan CSS',
       'Analisis komponen desain otomatis',
       'Pengaturan responsivitas kode output',
-      'Preview hasil kode secara real-time',
       'Copy-paste kode langsung ke project',
       'Support berbagai framework CSS (Tailwind, Bootstrap, dll)',
       'Optimasi untuk berbagai jenis UI/UX design'
@@ -404,31 +391,6 @@ export const sourceCodeData: SourceCode[] = [
       github: 'bimadevs'
     }
   },
-  {
-    id: '18',
-    title: 'Roast-IG',
-    description: 'Platform AI untuk menganalisis dan memberikan kritik konstruktif (roast) terhadap feed Instagram. Meningkatkan kualitas konten dengan saran yang dipersonalisasi.',
-    thumbnail: '/images/roast-ig.png',
-    category: 'AI Tools',
-    isNew: true,
-    githubUrl: 'https://github.com/bimadevs/roast-ig',
-    demoUrl: 'https://roast-ig.vercel.app',
-    languages: ['TypeScript', 'JavaScript'],
-    technologies: ['React', 'Next.js', 'TailwindCSS', 'Instagram API', 'OpenAI API', 'Prisma'],
-    features: [
-      'Analisis feed Instagram dengan AI',
-      'Kritik konstruktif tentang konten, caption, dan estetika',
-      'Saran peningkatan untuk meningkatkan engagement',
-      'Analisis warna dan komposisi visual',
-      'Insight tentang waktu posting optimal',
-      'Rekomendasi hashtag berdasarkan konten',
-      'Dashboard analitik performa konten'
-    ],
-    author: {
-      name: 'Bimadev',
-      github: 'bimadevs'
-    }
-  }
 ];
 
 export const categories = [

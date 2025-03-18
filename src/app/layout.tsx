@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
 import { AuthProvider } from '@/context/AuthContext';
 import { ToastProvider } from '@/context/ToastContext';
+import FloatingPromoButton from './components/FloatingPromoButton';
+import WelcomePopup from './components/WelcomePopup';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -84,6 +86,8 @@ export default function RootLayout({
           <ToastProvider>
             {children}
             <Footer />
+            <FloatingPromoButton />
+            <WelcomePopup />
           </ToastProvider>
         </AuthProvider>
       </body>
