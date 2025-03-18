@@ -21,7 +21,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
   const { showToast } = useToast();
 
   const sourceCode = sourceCodeData.find((item) => item.id === params.id);
-  
+
   // Memastikan languages dan technologies selalu array, bahkan jika undefined
   const safeLanguages = sourceCode && Array.isArray(sourceCode.languages) ? sourceCode.languages : [];
   const safeTechnologies = sourceCode && Array.isArray(sourceCode.technologies) ? sourceCode.technologies : [];
@@ -292,15 +292,14 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
           <div className="flex border-b border-slate-800/70 mb-8">
             <button
               onClick={() => setActiveTab('features')}
-              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
-                activeTab === 'features'
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${activeTab === 'features'
                   ? 'text-purple-400 border-b-2 border-purple-400'
                   : 'text-slate-400 hover:text-slate-300 transition-colors'
-              }`}
+                }`}
             >
               Fitur
             </button>
-            <button
+            {/* <button
               onClick={() => setActiveTab('usage')}
               className={`px-6 py-3 font-medium text-sm focus:outline-none ${
                 activeTab === 'usage'
@@ -310,6 +309,7 @@ export default function SourceCodeDetail({ params }: { params: { id: string } })
             >
               Cara Penggunaan
             </button>
+            */}
           </div>
 
           <div className="p-1">
