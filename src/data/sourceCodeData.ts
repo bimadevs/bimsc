@@ -378,6 +378,56 @@ export const sourceCodeData: SourceCode[] = [
       name: 'Bimadev',
       github: 'bimadevs'
     }
+  },
+  {
+    id: '17',
+    title: 'Image-to-Code',
+    description: 'Aplikasi web AI yang dapat mengkonversi gambar UI/desain menjadi kode HTML dan CSS. Menggunakan model vision-to-text untuk menganalisis komponen dan menghasilkan implementasi kode yang akurat.',
+    thumbnail: '/images/image-to-code.png',
+    category: 'AI Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/image-to-code',
+    demoUrl: 'https://image-to-code-app.vercel.app',
+    languages: ['TypeScript', 'JavaScript', 'Python'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Langchain', 'OpenAI API', 'Vercel AI SDK'],
+    features: [
+      'Konversi gambar UI menjadi kode HTML dan CSS',
+      'Analisis komponen desain otomatis',
+      'Pengaturan responsivitas kode output',
+      'Preview hasil kode secara real-time',
+      'Copy-paste kode langsung ke project',
+      'Support berbagai framework CSS (Tailwind, Bootstrap, dll)',
+      'Optimasi untuk berbagai jenis UI/UX design'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '18',
+    title: 'Roast-IG',
+    description: 'Platform AI untuk menganalisis dan memberikan kritik konstruktif (roast) terhadap feed Instagram. Meningkatkan kualitas konten dengan saran yang dipersonalisasi.',
+    thumbnail: '/images/roast-ig.png',
+    category: 'AI Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/roast-ig',
+    demoUrl: 'https://roast-ig.vercel.app',
+    languages: ['TypeScript', 'JavaScript'],
+    technologies: ['React', 'Next.js', 'TailwindCSS', 'Instagram API', 'OpenAI API', 'Prisma'],
+    features: [
+      'Analisis feed Instagram dengan AI',
+      'Kritik konstruktif tentang konten, caption, dan estetika',
+      'Saran peningkatan untuk meningkatkan engagement',
+      'Analisis warna dan komposisi visual',
+      'Insight tentang waktu posting optimal',
+      'Rekomendasi hashtag berdasarkan konten',
+      'Dashboard analitik performa konten'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
   }
 ];
 
