@@ -105,27 +105,25 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/bimadevs"
+                href="https://wa.me/6282254044783?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20di%20website%20BimSC"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-blue-400 transition-colors relative group"
-                aria-label="Twitter"
+                className="text-green-400 hover:text-green-500 transition-colors relative group"
+                aria-label="WhatsApp Business"
               >
-                <div className="absolute -inset-2 rounded-full bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse"></div>
-                <svg className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                <div className="absolute -inset-2 rounded-full bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.001 2.002c-5.522 0-9.999 4.477-9.999 9.999 0 1.869.518 3.613 1.412 5.109l-1.375 4.497c-.103.335.003.692.222.941.193.218.463.341.743.341.097 0 .195-.013.29-.039l4.705-1.335c1.659 1.053 3.597 1.631 5.603 1.635h.004c5.522 0 9.999-4.477 9.999-9.999-.003-5.522-4.481-9.999-10.003-9.999zm.004 18.178h-.003c-1.679-.002-3.317-.467-4.735-1.349l-.335-.199-3.494.976.955-3.147-.216-.346c-.936-1.497-1.429-3.228-1.429-5.012 0-5.181 4.217-9.398 9.401-9.398 2.512.001 4.871.981 6.646 2.758 1.775 1.777 2.752 4.138 2.751 6.648-.002 5.181-4.219 9.398-9.4 9.398zm5.108-7.075c-.283-.142-1.687-.835-1.95-.931-.261-.096-.452-.143-.642.143-.19.286-.737.932-.904 1.122-.167.191-.334.214-.618.071-.286-.143-1.195-.44-2.277-1.405-.841-.751-1.408-1.677-1.573-1.959-.166-.286-.018-.44.125-.582.128-.128.286-.334.429-.501.143-.167.189-.286.284-.476.095-.191.048-.358-.024-.501-.071-.143-.642-1.544-.881-2.119-.232-.557-.467-.482-.642-.492l-.547-.01c-.191 0-.44.071-.69.358-.238.286-.91.89-.91.216 0 1.327.964 2.606 1.099 2.787.136.181 1.937 2.96 4.69 4.146 2.774 1.187 2.774.793 3.273.743.499-.048 1.687-.689 1.925-1.354.237-.668.237-1.236.166-1.354-.071-.119-.262-.186-.547-.328z" />
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/bimadevs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-cyan-400 transition-colors relative group"
-                aria-label="LinkedIn"
+                href="mailto:bimadev06@gmail.com"
+                className="text-purple-400 hover:text-purple-500 transition-colors relative group"
+                aria-label="Email"
               >
-                <div className="absolute -inset-2 rounded-full bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse"></div>
+                <div className="absolute -inset-2 rounded-full bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse"></div>
                 <svg className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
                 </svg>
               </a>
             </div>
