@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     template: '%s | BimSC'
   },
   description: 'Platform berbagi source code berkualitas untuk developer Indonesia. Temukan berbagai source code untuk mempercepat development project Anda.',
-  keywords: ['source code', 'developer indonesia', 'code sharing', 'open source', 'web development', 'programming', 'coding', 'github', 'react', 'nextjs', 'typescript', 'bimsc', 'bimadev'],
-  authors: [{ name: 'Bimadev', url: 'https://github.com/bimadevs' }],
+  keywords: ['source code', 'developer indonesia', 'code sharing', 'open source', 'web development', 'programming', 'coding', 'whatsapp', 'react', 'nextjs', 'typescript', 'bimsc', 'bimadev'],
+  authors: [{ name: 'Bimadev', url: 'https://wa.me/6282254044783' }],
   creator: 'Bimadev',
   publisher: 'BimaDev',
   formatDetection: {

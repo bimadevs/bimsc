@@ -103,7 +103,7 @@ export default function TermsOfService() {
               <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-800">
                 <p className="text-slate-400">Email: legal@spacecodehub.com</p>
                 <p className="text-slate-400">Telegram: @SpaceCodeHub</p>
-                <p className="text-slate-400">GitHub: github.com/bimadevs</p>
+                <p className="text-slate-400">WhatsApp: <a href="https://wa.me/6282254044783" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-500 transition-colors">0822-5404-4783</a></p>
               </div>
             </section>
           </div>
