@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">1. Informasi yang Kami Kumpulkan</h2>
               <p className="text-slate-400">
-                SpaceCode Hub mengumpulkan beberapa informasi pribadi untuk meningkatkan pengalaman pengguna dan menyediakan layanan yang lebih baik. Informasi yang kami kumpulkan meliputi:
+                BimSC mengumpulkan beberapa informasi pribadi untuk meningkatkan pengalaman pengguna dan menyediakan layanan yang lebih baik. Informasi yang kami kumpulkan meliputi:
               </p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
                 <li>Alamat email (jika Anda berlangganan newsletter)</li>
@@ -58,7 +58,7 @@ export default function PrivacyPolicy() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">4. Cookies dan Teknologi Pelacakan</h2>
               <p className="text-slate-400">
-                SpaceCode Hub menggunakan cookies dan teknologi pelacakan serupa untuk:
+                BimSC menggunakan cookies dan teknologi pelacakan serupa untuk:
               </p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
                 <li>Menjaga status login pengguna</li>

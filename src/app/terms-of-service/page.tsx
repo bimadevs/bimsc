@@ -19,7 +19,7 @@ export default function TermsOfService() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">1. Penerimaan Syarat</h2>
               <p className="text-slate-400">
-                Dengan mengakses dan menggunakan SpaceCode Hub, Anda menyetujui untuk terikat oleh syarat dan ketentuan ini. Jika Anda tidak setuju dengan bagian apapun dari syarat ini, Anda tidak diperkenankan untuk menggunakan layanan kami.
+                Dengan mengakses dan menggunakan BimSC, Anda menyetujui untuk terikat oleh syarat dan ketentuan ini. Jika Anda tidak setuju dengan bagian apapun dari syarat ini, Anda tidak diperkenankan untuk menggunakan layanan kami.
               </p>
             </section>
 
@@ -39,7 +39,7 @@ export default function TermsOfService() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">3. Akun Pengguna</h2>
               <p className="text-slate-400">
-                Ketika membuat akun di SpaceCode Hub:
+                Ketika membuat akun di BimSC:
               </p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
                 <li>Anda bertanggung jawab atas keamanan akun Anda</li>
@@ -78,7 +78,7 @@ export default function TermsOfService() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">6. Batasan Tanggung Jawab</h2>
               <p className="text-slate-400">
-                SpaceCode Hub tidak bertanggung jawab atas:
+                BimSC tidak bertanggung jawab atas:
               </p>
               <ul className="list-disc list-inside text-slate-400 space-y-2">
                 <li>Kerugian yang timbul dari penggunaan source code</li>

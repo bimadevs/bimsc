@@ -19,7 +19,7 @@ export default function License() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white">1. Lisensi Platform</h2>
               <p className="text-slate-400">
-                SpaceCode Hub adalah platform berbagi source code yang menghormati dan melindungi hak kekayaan intelektual. Semua konten di platform ini dilindungi oleh hukum hak cipta dan ketentuan lisensi yang berlaku.
+                BimSC adalah platform berbagi source code yang menghormati dan melindungi hak kekayaan intelektual. Semua konten di platform ini dilindungi oleh hukum hak cipta dan ketentuan lisensi yang berlaku.
               </p>
             </section>
 
