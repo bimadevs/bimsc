@@ -166,7 +166,7 @@ export default function Register() {
       <main className="container mx-auto px-4 py-8 pt-24 md:pt-32 relative z-10">
         <div className="max-w-md mx-auto mt-8 relative">
           {/* Floating Astronaut */}
-          <div className="absolute -top-16 -left-16 opacity-60 pointer-events-none hidden md:block z-0">
+          {/* <div className="absolute -top-16 -left-16 opacity-60 pointer-events-none hidden md:block z-0">
             <div className="relative w-40 h-40 animate-float" style={{ animationDuration: '6s' }}>
               <Image 
                 src="/images/rocket.png" 
@@ -176,7 +176,7 @@ export default function Register() {
                 className="object-contain"
               />
             </div>
-          </div>
+          </div> */}
           
           {/* Register Form Card */}
           <div className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-2xl border border-slate-700/50 shadow-xl relative overflow-hidden z-10">
