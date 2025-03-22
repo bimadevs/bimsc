@@ -22,7 +22,7 @@ export const sourceCodeData: SourceCode[] = [
     title: 'Realtime Chat Golang',
     description: 'Aplikasi chat realtime yang dibangun dengan Go dan WebSocket. Mendukung chat personal dan grup dengan performa tinggi.',
     thumbnail: '/images/chat-go.png',
-    category: 'Backend',
+    category: 'Full Stack',
     githubUrl: 'https://github.com/bimadevs/realtime-chat-golang',
     languages: ['Go'],
     technologies: ['Gorilla WebSocket', 'Fiber', 'SQLite3'],
@@ -90,9 +90,9 @@ export const sourceCodeData: SourceCode[] = [
     title: 'Crypto Tracker',
     description: 'Aplikasi tracking cryptocurrency dengan fitur realtime price updates dan portfolio management.',
     thumbnail: '/images/crypto-tracker.png',
-    category: 'Web Development',
+    category: 'Frontend',
     githubUrl: 'https://github.com/bimadevs/crypto_tracker',
-    demoUrl: 'https://crypto-tracker-demo.example.com',
+    demoUrl: 'crypto-tracker-rho-three.vercel.app',
     languages: ['TypeScript'],
     technologies: ['React', 'NextJs', 'CoinCap API', 'TailwindCSS', 'Framer Motion'],
     features: [
@@ -399,11 +399,125 @@ export const sourceCodeData: SourceCode[] = [
       github: 'Haisyam'
     }
   },
+  {
+    id: '19',
+    title: 'Crypto Dashboard',
+    description: 'Dashboard interaktif untuk memantau pergerakan harga cryptocurrency dengan visualisasi data yang kaya dan realtime updates.',
+    thumbnail: '/images/crypto-dashboard.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/crypto-dashboard',
+    demoUrl: 'https://crypto-dashboard-six-tau.vercel.app/',
+    languages: ['TypeScript'],
+    technologies: ['React', 'ShadCN UI', 'TailwindCSS', 'CoinGecko API', 'Recharts'],
+    features: [
+      'Monitoring harga realtime',
+      'Visualisasi data dengan grafik interaktif',
+      'Portfolio tracker',
+      'Perbandingan harga antar mata uang',
+      'Pemberitahuan harga',
+      'Histori pergerakan harga',
+      'Responsif untuk berbagai ukuran layar'
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '20',
+    title: 'Dancing Drawing Board',
+    description: 'Aplikasi kanvas interaktif yang menggabungkan seni visual dengan animasi dan musik, menciptakan pengalaman menggambar yang dinamis.',
+    thumbnail: '/images/dancing-drawing-board.png',
+    category: 'Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/dancing-drawing-board',
+    demoUrl: 'https://dancing-drawing-board.vercel.app',
+    languages: ['TypeScript'],
+    technologies: ['React', 'Fabric.js', 'TailwindCSS'],
+    features: [
+      'Kanvas interaktif dengan efek visual dinamis',
+      'Berbagai jenis brush dan alat menggambar',
+      'Palet warna yang dapat disesuaikan',
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '21',
+    title: 'Generator Faktur',
+    description: 'Aplikasi untuk membuat faktur dan kwitansi dengan mudah, cepat dan tampilan yang profesional, dilengkapi dengan sistem pengelolaan pelanggan.',
+    thumbnail: '/images/generator-faktur.png',
+    category: 'Tools',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/generator-faktur',
+    demoUrl: 'https://generator-faktur.vercel.app',
+    languages: ['JavaScript'],
+    technologies: ['Laravel', 'Alpine.js', 'TailwindCSS', 'DomPDF', 'MySQL'],
+    features: [
+      'Pembuatan faktur dengan template profesional',
+      'Ekspor ke PDF',
+      'Penghitungan Otomatis',
+      'Responsif',
+      'Fill Dummy Data',
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '22',
+    title: 'Template Website Crypto',
+    description: 'Template website responsif dan modern untuk proyek cryptocurrency, ICO, atau exchange dengan desain futuristik dan fitur-fitur yang dioptimalkan untuk industri crypto.',
+    thumbnail: '/images/template-website-crypto.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/template-website-crypto',
+    demoUrl: 'https://template-website-crypto.vercel.app',
+    languages: ['TypeScript', 'CSS'],
+    technologies: ['React', 'TailwindCSS', 'Framer Motion'],
+    features: [
+      '✨ Desain Modern & Premium',
+      '📱 Responsif Sepenuhnya',
+      '🎭 Animasi Menarik',
+      '🧩 Komponen Modular',
+      '🎨 Styling Modern',
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
+  {
+    id: '23',
+    title: 'Windows XP Replica',
+    description: 'Replika sistem operasi Windows XP di web browser dengan tampilan dan fungsionalitas yang mirip, memberikan pengalaman nostalgia klasik Windows XP.',
+    thumbnail: '/images/windows-xp-replica.png',
+    category: 'Frontend',
+    isNew: true,
+    githubUrl: 'https://github.com/bimadevs/windows-xp-replica',
+    demoUrl: 'https://windows-xp-replica-coral.vercel.app/',
+    languages: ['TypeScript'],
+    technologies: ['React', 'TailwindCSS', 'Shadcn/UI'],
+    features: [
+      'Start menu dan taskbar fungsional',
+      'Desktop dengan ikon yang dapat diinteraksi',
+      'Aplikasi bawaan seperti Notepad, Calculator, dan Internet Explorer',
+      'Sound effect klasik Windows XP',
+      'Window management (minimize, maximize, close)',
+    ],
+    author: {
+      name: 'Bimadev',
+      github: 'bimadevs'
+    }
+  },
 ];
 
 export const categories = [
   'Semua',
-  'Web Development',
   'Mobile Apps',
   'Full Stack',
   'Backend',
