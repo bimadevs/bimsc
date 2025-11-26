@@ -172,21 +172,7 @@ export default function About() {
 
               <div className="md:w-1/2 flex justify-center">
                 <div className="relative w-64 h-64">
-                  {/* Planet */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 animate-pulse" style={{ animationDuration: '4s' }} />
-                  <div className="absolute inset-[4px] rounded-full bg-slate-950" />
-
-                  {/* Rings */}
-                  <div className="absolute inset-[-20px] border-2 border-purple-500/20 rounded-full animate-spin" style={{ animationDuration: '20s', transform: 'rotateX(75deg)' }} />
-                  <div className="absolute inset-[-40px] border-2 border-blue-500/20 rounded-full animate-spin" style={{ animationDuration: '25s', transform: 'rotateX(75deg) rotateY(10deg)' }} />
-
-                  {/* Satellites */}
-                  <div className="absolute inset-[-20px] animate-spin" style={{ animationDuration: '10s' }}>
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50" />
-                  </div>
-                  <div className="absolute inset-[-40px] animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50" />
-                  </div>
+                  <img src="./logo-color.svg" alt="BimaDev Logo" className="w-full h-full object-contain"/>
                 </div>
               </div>
             </div>

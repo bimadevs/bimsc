@@ -51,6 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly' as ChangeFrequency,
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/disclaimer`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as ChangeFrequency,
+      priority: 0.5,
+    },
   ]
 
   // Halaman source code dinamis dari data statis
