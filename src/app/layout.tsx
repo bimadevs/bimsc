@@ -2,7 +2,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Footer from './components/Footer';
-import { AuthProvider } from '@/context/AuthContext';
 import { ToastProvider } from '@/context/ToastContext';
 import FloatingPromoButton from './components/FloatingPromoButton';
 import WelcomePopup from './components/WelcomePopup';
@@ -82,14 +81,12 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <AuthProvider>
-          <ToastProvider>
-            {children}
-            <Footer />
-            <FloatingPromoButton />
-            <WelcomePopup />
-          </ToastProvider>
-        </AuthProvider>
+        <ToastProvider>
+          {children}
+          <Footer />
+          <FloatingPromoButton />
+          <WelcomePopup />
+        </ToastProvider>
       </body>
     </html>
   );

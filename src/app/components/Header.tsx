@@ -3,28 +3,20 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/context/ToastContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { user, signOut, isLoading } = useAuth();
+
   const { showToast } = useToast();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSignOut = async () => {
-    showToast('Terima kasih sudah berkunjung! Sampai jumpa kembali 👋', 'info');
-    
-    // Delay sedikit untuk memastikan toast muncul sebelum redirect
-    setTimeout(async () => {
-      await signOut();
-    }, 1000);
-  };
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,37 +107,7 @@ const Header = () => {
               </Link>
             ))}
 
-            {/* Auth Buttons or Profile */}
-            {isLoading ? (
-              <div className="w-8 h-8 rounded-full border-2 border-purple-500 border-t-transparent animate-spin"></div>
-            ) : user ? (
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold">
-                  {user.email?.charAt(0).toUpperCase()}
-                </div>
-                <button
-                  onClick={handleSignOut}
-                  className="px-4 py-2 text-sm font-medium text-red-400 hover:text-red-300 rounded-lg transition-colors hover:bg-red-500/10"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-2">
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm font-medium text-white hover:text-white rounded-lg transition-colors hover:bg-slate-800/70"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/register"
-                  className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors"
-                >
-                  Daftar
-                </Link>
-              </div>
-            )}
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -192,50 +154,7 @@ const Header = () => {
                 </Link>
               ))}
 
-              {/* Mobile Auth Buttons */}
-              {isLoading ? (
-                <div className="flex justify-center py-3">
-                  <div className="w-8 h-8 rounded-full border-2 border-purple-500 border-t-transparent animate-spin"></div>
-                </div>
-              ) : user ? (
-                <>
-                  <div className="px-4 py-3 border-t border-slate-800">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold">
-                        {user.email?.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <p className="text-white font-medium">{user.email?.split('@')[0]}</p>
-                        <p className="text-slate-400 text-sm truncate">{user.email}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleSignOut}
-                    className="flex items-center w-full px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-200"
-                  >
-                    <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                    <span className="font-medium">Logout</span>
-                  </button>
-                </>
-              ) : (
-                <div className="flex flex-col gap-2 p-2 border-t border-slate-800">
-                  <Link
-                    href="/login"
-                    className="flex items-center justify-center px-4 py-3 rounded-lg text-white hover:bg-slate-800/70 transition-all duration-200"
-                  >
-                    <span className="font-medium">Login</span>
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="flex items-center justify-center px-4 py-3 rounded-lg text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
-                  >
-                    <span className="font-medium">Daftar</span>
-                  </Link>
-                </div>
-              )}
+
             </div>
           </div>
         </div>

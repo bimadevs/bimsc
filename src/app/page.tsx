@@ -8,7 +8,6 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/context/ToastContext';
-import { useAuth } from '@/context/AuthContext';
 import PromoSection from './components/PromoSection';
 
 // Get the latest 3 source codes
@@ -60,23 +59,10 @@ const popularTechnologies = (() => {
 
 export default function Home() {
   const { showToast } = useToast();
-  const { user, showWelcomeToast, setShowWelcomeToast } = useAuth();
+
   const searchParams = useSearchParams();
   
-  useEffect(() => {
-    // Cek apakah ada parameter showWelcome dari callback login
-    if (searchParams.get('showWelcome') === 'true' && user) {
-      const userName = user.email?.split('@')[0] || 'Pengguna';
-      showToast(`Selamat datang, ${userName}! 👋`, 'success');
-    }
-    
-    // Cek apakah perlu menampilkan toast selamat datang dari AuthContext
-    if (showWelcomeToast && user) {
-      const userName = user.email?.split('@')[0] || 'Pengguna';
-      showToast(`Selamat datang, ${userName}! 👋`, 'success');
-      setShowWelcomeToast(false);
-    }
-  }, [searchParams, user, showToast, showWelcomeToast, setShowWelcomeToast]);
+
 
   return (
     <main className="min-h-screen bg-slate-950">

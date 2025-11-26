@@ -1,32 +1,9 @@
 import { MetadataRoute } from 'next'
-import { createClient_browser } from '@/utils/supabase'
-
-// Interface untuk tipe data
-interface SourceCode {
-  id: string
-  updated_at: string
-}
-
-interface Category {
-  id: string
-  updated_at: string
-}
+import { sourceCodeData } from '@/data/sourceCodeData'
 
 type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const supabase = createClient_browser()
-  
-  // Dapatkan semua source code
-  const { data: sourceCodes } = await supabase
-    .from('source_codes')
-    .select('id, updated_at')
-  
-  // Dapatkan semua kategori
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('id, updated_at')
-
   // URL dasar website
   const baseUrl = 'https://sc.bimadev.xyz'
 
@@ -76,21 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Halaman source code dinamis
-  const sourceCodePages = ((sourceCodes || []) as SourceCode[]).map((sourceCode) => ({
+  // Halaman source code dinamis dari data statis
+  const sourceCodePages = sourceCodeData.map((sourceCode) => ({
     url: `${baseUrl}/source-code/${sourceCode.id}`,
-    lastModified: new Date(sourceCode.updated_at),
+    lastModified: new Date(),
     changeFrequency: 'weekly' as ChangeFrequency,
     priority: 0.7,
   }))
 
-  // Halaman kategori dinamis
-  const categoryPages = ((categories || []) as Category[]).map((category) => ({
-    url: `${baseUrl}/categories/${category.id}`,
-    lastModified: new Date(category.updated_at),
-    changeFrequency: 'weekly' as ChangeFrequency,
-    priority: 0.6,
-  }))
-
-  return [...staticPages, ...sourceCodePages, ...categoryPages]
-} 
+  return [...staticPages, ...sourceCodePages]
+}
